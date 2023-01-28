@@ -4,9 +4,11 @@ import 'package:flutter/src/widgets/framework.dart';
 
 class OrderPage extends StatefulWidget {
   final String rate, dimension, pcs, productname, uuid;
+  final area;
   const OrderPage(
       {super.key,
       required this.dimension,
+      required this.area,
       required this.uuid,
       required this.pcs,
       required this.productname,

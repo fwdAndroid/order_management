@@ -98,6 +98,7 @@ class _ProductDetailState extends State<ProductDetail> {
                   context,
                   MaterialPageRoute(
                       builder: (builder) => OrderPage(
+                            area: widget.area,
                             uuid: widget.uuid,
                             dimension: widget.dimension,
                             pcs: widget.pcs,
