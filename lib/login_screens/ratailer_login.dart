@@ -100,7 +100,9 @@ class _RetailerAppLoginState extends State<RetailerAppLogin> {
                             Navigator.pushAndRemoveUntil(
                                 context,
                                 MaterialPageRoute(
-                                    builder: (builder) => MainRetailerPage()),
+                                    builder: (builder) => MainRetailerPage(
+                                          area: element['area'],
+                                        )),
                                 (route) => false);
                           });
                         }

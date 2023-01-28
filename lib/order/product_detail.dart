@@ -5,8 +5,10 @@ import 'package:order_management/order/orderpage.dart';
 
 class ProductDetail extends StatefulWidget {
   final String rate, dimension, pcs, productname, uuid;
+  final area;
   const ProductDetail(
       {super.key,
+      required this.area,
       required this.dimension,
       required this.uuid,
       required this.pcs,
@@ -90,6 +92,7 @@ class _ProductDetailState extends State<ProductDetail> {
           ),
           ElevatedButton(
             onPressed: () {
+              print(widget.area);
               print(widget.uuid);
               Navigator.push(
                   context,
