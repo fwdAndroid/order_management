@@ -43,7 +43,7 @@ class _RetailerAppLoginState extends State<RetailerAppLogin> {
               height: 200,
             ),
             Text(
-              " Distributer Officer Login",
+              "Retailer Officer Login",
               style: TextStyle(fontWeight: FontWeight.bold, fontSize: 22),
             ),
             SizedBox(
