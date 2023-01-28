@@ -35,7 +35,9 @@ class _MainScreenState extends State<MainScreen> {
                 Navigator.pushReplacement(
                     context,
                     MaterialPageRoute(
-                        builder: (builder) => BussinessManagerLogin()));
+                        builder: (builder) => BussinessManagerLogin(
+                              bussines: "Business Manager",
+                            )));
               },
               leading: Icon(Icons.business),
               title: Text("Bussiness Manager "),

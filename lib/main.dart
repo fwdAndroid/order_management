@@ -2,7 +2,9 @@ import 'package:animated_splash_screen/animated_splash_screen.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:order_management/mains_screen.dart';
+import 'package:order_management/provider/circular_provider.dart';
 import 'package:page_transition/page_transition.dart';
+import 'package:provider/provider.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -10,7 +12,12 @@ Future<void> main() async {
   await Firebase.initializeApp();
 
   runApp(
-    MyApp(),
+    MultiProvider(
+      providers: [
+        ChangeNotifierProvider(create: (_) => CircularProgressProvider()),
+      ],
+      child: MyApp(),
+    ),
   );
 }
 
