@@ -72,53 +72,44 @@ class _SalesOfficeLoginState extends State<SalesOfficeLogin> {
                   fixedSize: Size(300, 50),
                   shape: StadiumBorder()),
               onPressed: () async {
+                print("Print");
                 try {
                   await FirebaseFirestore.instance
-                      .collection('sales')
-                      .doc(FirebaseAuth.instance.currentUser!.uid)
+                      .collection("sales")
                       .get()
-                      .then(
-                        (DocumentSnapshot snapshot) => {
-                          print(widget.r),
-                          if (snapshot.exists)
-                            {
-                              if (emailController.text.isEmpty ||
-                                  passController.text.isEmpty)
-                                {
-                                  Customdialog().showInSnackBar(
-                                      "Enter Required Fields", context)
-                                }
-                              else if (emailController.text.isNotEmpty &&
-                                  passController.text.isNotEmpty)
-                                {
-                                  FirebaseAuth.instance
-                                      .signInWithEmailAndPassword(
-                                    email: emailController.text,
-                                    password: passController.text,
-                                  )
-                                      .then((value) {
-                                    Customdialog().showInSnackBar(
-                                        "Login Successfully", context);
-                                    Navigator.push(
-                                        context,
-                                        MaterialPageRoute(
-                                            builder: (builder) =>
-                                                MainSalesPage()));
-                                  })
-                                }
-                              else
-                                {
-                                  Customdialog()
-                                      .showInSnackBar("Failed", context),
-                                }
-                            }
-                          else
-                            {
-                              Customdialog()
-                                  .showInSnackBar("Something Wrong", context)
-                            }
-                        },
-                      );
+                      .then((QuerySnapshot snapshot) {
+                    print("sad");
+                    snapshot.docs.forEach((element) {
+                      if (element['password'] == passController.text &&
+                          element['email'] == emailController.text &&
+                          element['type'] == widget.r) {
+                        if (emailController.text.isEmpty ||
+                            passController.text.isEmpty) {
+                          Customdialog().showInSnackBar(
+                              "Email and Password is needed", context);
+                        } else {
+                          FirebaseAuth.instance
+                              .signInWithEmailAndPassword(
+                            email: emailController.text,
+                            password: passController.text,
+                          )
+                              .then((value) {
+                            Customdialog()
+                                .showInSnackBar("Login Successfullt", context);
+                            Navigator.pushAndRemoveUntil(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (builder) => MainSalesPage()),
+                                (route) => false);
+                          });
+                        }
+                        Customdialog()
+                            .showInSnackBar("Login Successfullt", context);
+                      } else {
+                        Customdialog().showInSnackBar("wrong", context);
+                      }
+                    });
+                  });
                 } catch (e) {
                   Customdialog().showInSnackBar(e.toString(), context);
                 }

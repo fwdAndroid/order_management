@@ -78,53 +78,42 @@ class _BussinessManagerLoginState extends State<BussinessManagerLogin> {
                     fixedSize: Size(300, 50),
                     shape: StadiumBorder()),
                 onPressed: () async {
+                  print("Print");
                   try {
                     await FirebaseFirestore.instance
-                        .collection('business')
-                        .doc(FirebaseAuth.instance.currentUser!.uid)
+                        .collection("business")
                         .get()
-                        .then(
-                          (DocumentSnapshot snapshot) => {
-                            print(widget.bussines),
-                            if (snapshot.exists)
-                              {
-                                if (emailController.text.isEmpty ||
-                                    passController.text.isEmpty)
-                                  {
-                                    Customdialog().showInSnackBar(
-                                        "Enter Required Fields", context)
-                                  }
-                                else if (emailController.text.isNotEmpty &&
-                                    passController.text.isNotEmpty)
-                                  {
-                                    FirebaseAuth.instance
-                                        .signInWithEmailAndPassword(
-                                      email: emailController.text,
-                                      password: passController.text,
-                                    )
-                                        .then((value) {
-                                      Customdialog().showInSnackBar(
-                                          "Login Successfully", context);
-                                      Navigator.push(
-                                          context,
-                                          MaterialPageRoute(
-                                              builder: (builder) =>
-                                                  MainBusinessPage()));
-                                    })
-                                  }
-                                else
-                                  {
-                                    Customdialog()
-                                        .showInSnackBar("Failed", context),
-                                  }
-                              }
-                            else
-                              {
-                                Customdialog()
-                                    .showInSnackBar("Something Wrong", context)
-                              }
-                          },
-                        );
+                        .then((QuerySnapshot snapshot) {
+                      print("sad");
+                      snapshot.docs.forEach((element) {
+                        if (element['password'] == passController.text &&
+                            element['email'] == emailController.text &&
+                            element['type'] == widget.bussines) {
+                          if (emailController.text.isEmpty ||
+                              passController.text.isEmpty) {
+                            Customdialog().showInSnackBar(
+                                "Email and Password is needed", context);
+                          } else {
+                            FirebaseAuth.instance
+                                .signInWithEmailAndPassword(
+                              email: emailController.text,
+                              password: passController.text,
+                            )
+                                .then((value) {
+                              Customdialog().showInSnackBar(
+                                  "Login Successfullt", context);
+                              Navigator.pushAndRemoveUntil(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (builder) => MainBusinessPage()),
+                                  (route) => false);
+                            });
+                          }
+                        } else {
+                          Customdialog().showInSnackBar("wrong", context);
+                        }
+                      });
+                    });
                   } catch (e) {
                     Customdialog().showInSnackBar(e.toString(), context);
                   }

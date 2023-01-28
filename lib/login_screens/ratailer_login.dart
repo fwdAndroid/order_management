@@ -2,6 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:order_management/pages/main_regional_page.dart';
+import 'package:order_management/pages/main_retailer_page.dart';
 import 'package:order_management/widgets/text_form_field_widget.dart';
 import 'package:order_management/widgets/utils.dart';
 
@@ -72,53 +73,44 @@ class _RetailerAppLoginState extends State<RetailerAppLogin> {
                   fixedSize: Size(300, 50),
                   shape: StadiumBorder()),
               onPressed: () async {
+                print("Print");
                 try {
                   await FirebaseFirestore.instance
-                      .collection('retailers')
-                      .doc(FirebaseAuth.instance.currentUser!.uid)
+                      .collection("retailers")
                       .get()
-                      .then(
-                        (DocumentSnapshot snapshot) => {
-                          print(widget.r),
-                          if (snapshot.exists)
-                            {
-                              if (emailController.text.isEmpty ||
-                                  passController.text.isEmpty)
-                                {
-                                  Customdialog().showInSnackBar(
-                                      "Enter Required Fields", context)
-                                }
-                              else if (emailController.text.isNotEmpty &&
-                                  passController.text.isNotEmpty)
-                                {
-                                  FirebaseAuth.instance
-                                      .signInWithEmailAndPassword(
-                                    email: emailController.text,
-                                    password: passController.text,
-                                  )
-                                      .then((value) {
-                                    Customdialog().showInSnackBar(
-                                        "Login Successfully", context);
-                                    Navigator.push(
-                                        context,
-                                        MaterialPageRoute(
-                                            builder: (builder) =>
-                                                MainRegionalPage()));
-                                  })
-                                }
-                              else
-                                {
-                                  Customdialog()
-                                      .showInSnackBar("Failed", context),
-                                }
-                            }
-                          else
-                            {
-                              Customdialog()
-                                  .showInSnackBar("Something Wrong", context)
-                            }
-                        },
-                      );
+                      .then((QuerySnapshot snapshot) {
+                    print("sad");
+                    snapshot.docs.forEach((element) {
+                      if (element['password'] == passController.text &&
+                          element['email'] == emailController.text &&
+                          element['type'] == widget.r) {
+                        if (emailController.text.isEmpty ||
+                            passController.text.isEmpty) {
+                          Customdialog().showInSnackBar(
+                              "Email and Password is needed", context);
+                        } else {
+                          FirebaseAuth.instance
+                              .signInWithEmailAndPassword(
+                            email: emailController.text,
+                            password: passController.text,
+                          )
+                              .then((value) {
+                            Customdialog()
+                                .showInSnackBar("Login Successfullt", context);
+                            Navigator.pushAndRemoveUntil(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (builder) => MainRetailerPage()),
+                                (route) => false);
+                          });
+                        }
+                        Customdialog()
+                            .showInSnackBar("Login Successfullt", context);
+                      } else {
+                        Customdialog().showInSnackBar("wrong", context);
+                      }
+                    });
+                  });
                 } catch (e) {
                   Customdialog().showInSnackBar(e.toString(), context);
                 }
