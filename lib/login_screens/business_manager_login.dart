@@ -41,11 +41,12 @@ class _BussinessManagerLoginState extends State<BussinessManagerLogin> {
           padding: EdgeInsets.symmetric(horizontal: 32),
           width: double.infinity,
           child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
               Image.asset(
                 "assets/splash.png",
-                height: 100,
+                height: 200,
               ),
               Text(
                 "Bussiness Manager Login",
@@ -93,7 +94,8 @@ class _BussinessManagerLoginState extends State<BussinessManagerLogin> {
                                     Customdialog().showInSnackBar(
                                         "Enter Required Fields", context)
                                   }
-                                else
+                                else if (emailController.text.isNotEmpty &&
+                                    passController.text.isNotEmpty)
                                   {
                                     FirebaseAuth.instance
                                         .signInWithEmailAndPassword(
@@ -101,17 +103,26 @@ class _BussinessManagerLoginState extends State<BussinessManagerLogin> {
                                       password: passController.text,
                                     )
                                         .then((value) {
-                                      print("object");
                                       Customdialog().showInSnackBar(
                                           "Login Successfully", context);
-                                      Navigator.pushReplacement(
+                                      Navigator.push(
                                           context,
                                           MaterialPageRoute(
                                               builder: (builder) =>
                                                   MainBusinessPage()));
                                     })
-                                  },
-                              },
+                                  }
+                                else
+                                  {
+                                    Customdialog()
+                                        .showInSnackBar("Failed", context),
+                                  }
+                              }
+                            else
+                              {
+                                Customdialog()
+                                    .showInSnackBar("Something Wrong", context)
+                              }
                           },
                         );
                   } catch (e) {

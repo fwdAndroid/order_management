@@ -47,8 +47,12 @@ class _MainScreenState extends State<MainScreen> {
           Card(
             child: ListTile(
               onTap: () {
-                Navigator.pushReplacement(context,
-                    MaterialPageRoute(builder: (builder) => RegionalLogin()));
+                Navigator.pushReplacement(
+                    context,
+                    MaterialPageRoute(
+                        builder: (builder) => RegionalLogin(
+                              regional: "Regional",
+                            )));
               },
               leading: Icon(Icons.recycling_outlined),
               title: Text("Regional Sales Manager "),
@@ -58,8 +62,12 @@ class _MainScreenState extends State<MainScreen> {
           Card(
             child: ListTile(
               onTap: () {
-                Navigator.pushReplacement(context,
-                    MaterialPageRoute(builder: (builder) => ZonalLogin()));
+                Navigator.pushReplacement(
+                    context,
+                    MaterialPageRoute(
+                        builder: (builder) => ZonalLogin(
+                              zonal: "Zonal",
+                            )));
               },
               leading: Icon(Icons.exposure_zero_outlined),
               title: Text("Zonal Sales Manager "),
@@ -69,8 +77,12 @@ class _MainScreenState extends State<MainScreen> {
           Card(
             child: ListTile(
               onTap: () {
-                Navigator.pushReplacement(context,
-                    MaterialPageRoute(builder: (builder) => AreaSales()));
+                Navigator.pushReplacement(
+                    context,
+                    MaterialPageRoute(
+                        builder: (builder) => AreaSales(
+                              area: "AreaManager",
+                            )));
               },
               leading: Icon(Icons.area_chart),
               title: Text("Area Sales Manager "),
@@ -83,7 +95,9 @@ class _MainScreenState extends State<MainScreen> {
                 Navigator.pushReplacement(
                     context,
                     MaterialPageRoute(
-                        builder: (builder) => TerritorySalesLogin()));
+                        builder: (builder) => TerritorySalesLogin(
+                              r: "Territory",
+                            )));
               },
               leading: Icon(Icons.terminal),
               title: Text("Territory Sales Manager "),
@@ -96,7 +110,9 @@ class _MainScreenState extends State<MainScreen> {
                 Navigator.pushReplacement(
                     context,
                     MaterialPageRoute(
-                        builder: (builder) => SalesOfficeLogin()));
+                        builder: (builder) => SalesOfficeLogin(
+                              r: "Sales Officer",
+                            )));
               },
               leading: Icon(Icons.local_post_office),
               title: Text("Sales Officer "),
@@ -109,7 +125,9 @@ class _MainScreenState extends State<MainScreen> {
                 Navigator.pushReplacement(
                     context,
                     MaterialPageRoute(
-                        builder: (builder) => DistributorLogin()));
+                        builder: (builder) => DistributorLogin(
+                              r: "Distributor",
+                            )));
               },
               leading: Icon(Icons.discount),
               title: Text("Distributer Officer "),
@@ -122,7 +140,9 @@ class _MainScreenState extends State<MainScreen> {
                 Navigator.pushReplacement(
                     context,
                     MaterialPageRoute(
-                        builder: (builder) => RetailerAppLogin()));
+                        builder: (builder) => RetailerAppLogin(
+                              r: "Retailer",
+                            )));
               },
               leading: Icon(Icons.shop),
               title: Text("Retailer App"),
