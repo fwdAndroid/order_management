@@ -20,6 +20,7 @@ class OrderModel {
   String RName; //Retailer Name
   String? SName;
   String? DName;
+  String? Status;
   String? AName; //Area Manager
   //Items
   String productName;
@@ -36,6 +37,7 @@ class OrderModel {
       required this.pcs,
       this.teritoryArea,
       this.uuid,
+      this.Status,
       this.areamanager,
       this.busnissarea,
       this.distributorarea,
@@ -59,6 +61,7 @@ class OrderModel {
         'dimensions': dimensions,
         'productName': productName,
         'PCS': pcs,
+        'Status': Status,
         'Territory Area': teritoryArea,
         'Area Area': areamanager,
         'Business Area': busnissarea,
@@ -84,6 +87,7 @@ class OrderModel {
     var snapshot = snaps.data() as Map<String, dynamic>;
 
     return OrderModel(
+        Status: snapshot['Status'],
         uid: snapshot['uid'],
         rate: snapshot['rate'],
         dimensions: snapshot['dimensions'],

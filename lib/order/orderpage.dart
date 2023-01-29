@@ -160,6 +160,7 @@ class _OrderPageState extends State<OrderPage> {
                               rate: widget.rate,
                               DName: values,
                               RName: widget.name,
+                              Status: "Active",
                               productname: widget.productname,
                               dimension: widget.dimension,
                               pcs: _pcsControleler.text);

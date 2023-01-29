@@ -14,6 +14,7 @@ class Database {
       required String dimension,
       required String pcs,
       String? DName,
+      String? Status,
       String? retailerarea,
       String? distributorarea}) async {
     String res = 'Some error occured';
@@ -25,6 +26,7 @@ class Database {
         teritoryArea: '',
         areamanager: '',
         busnissarea: '',
+        Status: Status,
         regionalarea: '',
         retailerarea: retailerarea,
         zonalarea: '',
