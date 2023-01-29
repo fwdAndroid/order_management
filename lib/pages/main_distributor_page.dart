@@ -132,7 +132,11 @@ class _MainDistributorPageState extends State<MainDistributorPage> {
                       Navigator.push(
                           context,
                           MaterialPageRoute(
-                              builder: (builder) => DistributorOrderPage()));
+                              builder: (builder) => DistributorOrderPage(
+                                    area: ds['area'],
+                                    email: ds['email'],
+                                    name: ds['name'],
+                                  )));
                     },
                     child: Text("View Orders"),
                     style: ElevatedButton.styleFrom(
