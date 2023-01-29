@@ -1,4 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 
 class OrderModel {
   String? uuid;
@@ -25,7 +26,8 @@ class OrderModel {
   String rate;
   String pcs;
   String dimensions;
-
+  //Auth ID
+  String? uid;
   OrderModel(
       {required this.RName,
       required this.productName,
@@ -47,6 +49,7 @@ class OrderModel {
       this.REName,
       this.SName,
       this.ZName,
+      this.uid,
       this.bName});
 
   ///Converting OBject into Json Object
@@ -72,7 +75,8 @@ class OrderModel {
         'Distributor Manager Name': DName,
         'Sales Officer Name': SName,
         'Regional Manager Name': REName,
-        'Area Manager Name': AName
+        'Area Manager Name': AName,
+        'uid': FirebaseAuth.instance.currentUser!.uid
       };
 
   ///
@@ -80,6 +84,7 @@ class OrderModel {
     var snapshot = snaps.data() as Map<String, dynamic>;
 
     return OrderModel(
+        uid: snapshot['uid'],
         rate: snapshot['rate'],
         dimensions: snapshot['dimensions'],
         RName: snapshot['RetailerName'],
