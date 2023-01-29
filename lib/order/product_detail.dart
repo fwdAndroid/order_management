@@ -6,9 +6,11 @@ import 'package:order_management/order/orderpage.dart';
 class ProductDetail extends StatefulWidget {
   final String rate, dimension, pcs, productname, uuid;
   final area;
+  final name;
   const ProductDetail(
       {super.key,
       required this.area,
+      required this.name,
       required this.dimension,
       required this.uuid,
       required this.pcs,
@@ -99,6 +101,7 @@ class _ProductDetailState extends State<ProductDetail> {
                   MaterialPageRoute(
                       builder: (builder) => OrderPage(
                             area: widget.area,
+                            name: widget.name,
                             uuid: widget.uuid,
                             dimension: widget.dimension,
                             pcs: widget.pcs,

@@ -102,6 +102,7 @@ class _RetailerAppLoginState extends State<RetailerAppLogin> {
                                 MaterialPageRoute(
                                     builder: (builder) => MainRetailerPage(
                                           area: element['area'],
+                                          name: element['name'],
                                         )),
                                 (route) => false);
                           });

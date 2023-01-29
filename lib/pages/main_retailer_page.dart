@@ -8,7 +8,8 @@ import 'package:order_management/order/product_detail.dart';
 
 class MainRetailerPage extends StatefulWidget {
   final area;
-  const MainRetailerPage({super.key, required this.area});
+  final name;
+  const MainRetailerPage({super.key, required this.area, required this.name});
 
   @override
   State<MainRetailerPage> createState() => _MainRetailerPageState();
@@ -73,6 +74,7 @@ class _MainRetailerPageState extends State<MainRetailerPage> {
                                   MaterialPageRoute(
                                       builder: (builder) => ProductDetail(
                                             area: widget.area,
+                                            name: widget.name,
                                             uuid: snap['uuid'],
                                             rate: snap['rate'],
                                             dimension: snap['dimensions'],

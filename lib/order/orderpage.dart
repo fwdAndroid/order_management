@@ -1,12 +1,16 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:dropdown_search/dropdown_search.dart';
+import 'package:order_management/database/db.dart';
+import 'package:order_management/widgets/utils.dart';
 
 class OrderPage extends StatefulWidget {
   final String rate, dimension, pcs, productname, uuid;
   final area;
+  final name;
   const OrderPage(
       {super.key,
+      required this.name,
       required this.dimension,
       required this.area,
       required this.uuid,
@@ -20,7 +24,7 @@ class OrderPage extends StatefulWidget {
 
 class _OrderPageState extends State<OrderPage> {
   TextEditingController _pcsControleler = TextEditingController();
-  String values = "Distributor Name";
+  var values;
 
   @override
   Widget build(BuildContext context) {
@@ -36,7 +40,7 @@ class _OrderPageState extends State<OrderPage> {
           Center(
             child: Image.asset(
               "assets/splash.png",
-              height: 250,
+              height: 200,
             ),
           ),
           StreamBuilder<QuerySnapshot>(
@@ -52,23 +56,38 @@ class _OrderPageState extends State<OrderPage> {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Container(
-                        margin: EdgeInsets.only(left: 15, right: 15, top: 15),
-                        child: DropdownSearch<String>(
-                            selectedItem: values,
-                            items: snapshot.data!.docs
-                                .map((DocumentSnapshot document) {
-                                  Map<String, dynamic> data =
-                                      document.data()! as Map<String, dynamic>;
-                                  print(data['area']);
-
-                                  return data["name"];
-                                })
-                                .toList()
-                                .cast<String>(),
-                            onChanged: (String? select) {
-                              select = values;
-                            }),
-                      ),
+                          margin: EdgeInsets.only(left: 15, right: 15, top: 15),
+                          child: Text(
+                            "Distributor Name",
+                            style: TextStyle(
+                                fontWeight: FontWeight.w700, fontSize: 17),
+                          )),
+                      Container(
+                          margin: EdgeInsets.only(left: 15, right: 15, top: 15),
+                          child: DropdownButton(
+                            isExpanded: true,
+                            value: values,
+                            items: snapshot.data!.docs.map((value) {
+                              debugPrint('makeModel: ${value.get('name')}');
+                              return DropdownMenuItem(
+                                value: value.get('name'),
+                                child: Text(
+                                  '${value.get('name')}',
+                                  overflow: TextOverflow.ellipsis,
+                                ),
+                              );
+                            }).toList(),
+                            onChanged: (value) {
+                              debugPrint('makeModel selected: $value');
+                              setState(
+                                () {
+                                  // Selected value will be stored
+                                  values = value;
+                                  // Default dropdown value won't be displayed anymore
+                                },
+                              );
+                            },
+                          )),
                       Container(
                           margin: EdgeInsets.only(left: 15, right: 15, top: 15),
                           child: Text(
@@ -108,6 +127,7 @@ class _OrderPageState extends State<OrderPage> {
                         margin: EdgeInsets.only(left: 15, right: 15, top: 4),
                         child: TextFormField(
                           controller: _pcsControleler,
+                          keyboardType: TextInputType.number,
                           decoration: InputDecoration(
                             hintText: widget.pcs,
                             border: OutlineInputBorder(),
@@ -133,22 +153,21 @@ class _OrderPageState extends State<OrderPage> {
                       ),
                       Center(
                           child: ElevatedButton(
-                        onPressed: () {
-                          print(widget.area);
-                          print(widget.uuid);
-                          Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                  builder: (builder) => OrderPage(
-                                        area: widget.area,
-                                        uuid: widget.uuid,
-                                        dimension: widget.dimension,
-                                        pcs: widget.pcs,
-                                        productname: widget.productname,
-                                        rate: widget.rate,
-                                      )));
+                        onPressed: () async {
+                          await Database().addOrder(
+                              retailerarea: widget.area,
+                              distributorarea: widget.area,
+                              rate: widget.rate,
+                              DName: values,
+                              RName: widget.name,
+                              productname: widget.productname,
+                              dimension: widget.dimension,
+                              pcs: _pcsControleler.text);
+
+                          Customdialog()
+                              .showInSnackBar("Database Added", context);
                         },
-                        child: Text("Order"),
+                        child: Text("Place Order"),
                         style: ElevatedButton.styleFrom(
                             backgroundColor: Colors.purple,
                             fixedSize: Size(250, 50),
