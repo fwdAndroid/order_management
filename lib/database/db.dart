@@ -14,6 +14,7 @@ class Database {
       required String dimension,
       required String pcs,
       String? DName,
+      String? distributorid,
       String? Status,
       String? retailerarea,
       String? distributorarea}) async {
@@ -32,6 +33,7 @@ class Database {
         zonalarea: '',
         salesaofficerarea: '',
         distributorarea: distributorarea,
+        distributorid: distributorid,
         tName: '',
         AName: '',
         bName: '',

@@ -5,6 +5,7 @@ import 'package:flutter/src/widgets/container.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:order_management/mains_screen.dart';
 import 'package:order_management/order/distributor_order_page.dart';
+import 'package:order_management/tabs/distributor_orders_tabs.dart';
 
 class MainDistributorPage extends StatefulWidget {
   const MainDistributorPage({super.key});
@@ -18,7 +19,22 @@ class _MainDistributorPageState extends State<MainDistributorPage> {
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
+          automaticallyImplyLeading: false,
           actions: [
+            TextButton(
+                onPressed: () {
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (builder) => DistributorOrdersTab()));
+                },
+                child: Text(
+                  "History",
+                  style: TextStyle(
+                    fontWeight: FontWeight.bold,
+                    color: Colors.white,
+                  ),
+                )),
             TextButton(
                 onPressed: () {
                   FirebaseAuth.instance.signOut().then((value) {

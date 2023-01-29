@@ -2,6 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:dropdown_search/dropdown_search.dart';
 import 'package:order_management/database/db.dart';
+import 'package:order_management/review/distributor_order_review.dart';
 import 'package:order_management/widgets/utils.dart';
 
 class DistributorOrderDetailPage extends StatefulWidget {
@@ -25,6 +26,7 @@ class _DistributorOrderDetailPageState
 
   @override
   Widget build(BuildContext context) {
+    TextEditingController _pcsControleler = TextEditingController();
     print(widget.distributorarea);
     return Scaffold(
       appBar: AppBar(
@@ -159,24 +161,28 @@ class _DistributorOrderDetailPageState
                                       fontWeight: FontWeight.w700,
                                       fontSize: 17),
                                 )),
-                            Container(
-                              margin:
-                                  EdgeInsets.only(left: 15, right: 15, top: 4),
-                              child: TextFormField(
-                                controller: _pcsControleler,
-                                keyboardType: TextInputType.number,
-                                decoration: InputDecoration(
-                                  hintText: snap['PCS'],
-                                  border: OutlineInputBorder(),
-                                ),
-                              ),
-                            ),
                             SizedBox(
                               height: 20,
                             ),
                             Center(
                               child: ElevatedButton(
-                                onPressed: () {},
+                                onPressed: () {
+                                  Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                          builder: (builder) =>
+                                              DistributorOrderReview(
+                                                distributorarea:
+                                                    snap['Distributor Area'],
+                                                productName:
+                                                    snap['productName'],
+                                                DistributorNamme:
+                                                    widget.distributorname,
+                                                uuid: snap['uuid'],
+                                                RetailNamer:
+                                                    snap['RetailerName'],
+                                              )));
+                                },
                                 child: Text('Review'),
                                 style: ElevatedButton.styleFrom(
                                     fixedSize: Size(200, 50),

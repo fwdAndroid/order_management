@@ -29,6 +29,7 @@ class OrderModel {
   String dimensions;
   //Auth ID
   String? uid;
+  String? distributorid;
   OrderModel(
       {required this.RName,
       required this.productName,
@@ -37,6 +38,7 @@ class OrderModel {
       required this.pcs,
       this.teritoryArea,
       this.uuid,
+      this.distributorid,
       this.Status,
       this.areamanager,
       this.busnissarea,
@@ -57,6 +59,8 @@ class OrderModel {
   ///Converting OBject into Json Object
   Map<String, dynamic> toJson() => {
         'uuid': uuid,
+
+        'distributorid': distributorid,
         'rate': rate,
         'dimensions': dimensions,
         'productName': productName,
@@ -87,6 +91,7 @@ class OrderModel {
     var snapshot = snaps.data() as Map<String, dynamic>;
 
     return OrderModel(
+        distributorid: snapshot['distributorid'],
         Status: snapshot['Status'],
         uid: snapshot['uid'],
         rate: snapshot['rate'],
