@@ -5,6 +5,7 @@ import 'package:flutter/src/widgets/container.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:order_management/mains_screen.dart';
 import 'package:order_management/order/product_detail.dart';
+import 'package:order_management/tabs/retailier_orders_tabs.dart';
 
 class MainRetailerPage extends StatefulWidget {
   final area;
@@ -20,12 +21,22 @@ class _MainRetailerPageState extends State<MainRetailerPage> {
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
-          centerTitle: true,
           title: Text(
             "Retailers App",
             style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
           ),
           actions: [
+            TextButton(
+                onPressed: () {
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (builder) => RetailerOrdersTabs()));
+                },
+                child: Text(
+                  "History",
+                  style: TextStyle(color: Colors.white),
+                )),
             TextButton(
                 onPressed: () async {
                   FirebaseAuth.instance.signOut().then((value) => {
