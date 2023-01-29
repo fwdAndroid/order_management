@@ -19,20 +19,20 @@ class OrderPage extends StatefulWidget {
 }
 
 class _OrderPageState extends State<OrderPage> {
+  TextEditingController _pcsControleler = TextEditingController();
   String values = "Distributor Name";
 
   @override
   Widget build(BuildContext context) {
+    print(widget.area);
     return Scaffold(
-      appBar: AppBar(
-        centerTitle: true,
-        backgroundColor: Colors.purple,
-        title: Text("Order Page"),
-      ),
-      backgroundColor: Colors.white,
-      body: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
+        appBar: AppBar(
+          centerTitle: true,
+          backgroundColor: Colors.purple,
+          title: Text("Order Page"),
+        ),
+        backgroundColor: Colors.white,
+        body: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
           Center(
             child: Image.asset(
               "assets/splash.png",
@@ -42,12 +42,14 @@ class _OrderPageState extends State<OrderPage> {
           StreamBuilder<QuerySnapshot>(
               stream: FirebaseFirestore.instance
                   .collection("distrubutor")
+                  .where("area", isEqualTo: widget.area)
                   .snapshots(),
               builder: (context, snapshot) {
                 if (!snapshot.hasData)
                   const Text("Loading.....");
                 else {
                   return Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Container(
                         margin: EdgeInsets.only(left: 15, right: 15, top: 15),
@@ -57,6 +59,8 @@ class _OrderPageState extends State<OrderPage> {
                                 .map((DocumentSnapshot document) {
                                   Map<String, dynamic> data =
                                       document.data()! as Map<String, dynamic>;
+                                  print(data['area']);
+
                                   return data["name"];
                                 })
                                 .toList()
@@ -65,92 +69,96 @@ class _OrderPageState extends State<OrderPage> {
                               select = values;
                             }),
                       ),
+                      Container(
+                          margin: EdgeInsets.only(left: 15, right: 15, top: 15),
+                          child: Text(
+                            "Product Name",
+                            style: TextStyle(
+                                fontWeight: FontWeight.w700, fontSize: 17),
+                          )),
+                      Container(
+                          margin: EdgeInsets.only(left: 15, right: 15, top: 2),
+                          child: Text(
+                            widget.productname,
+                            style: TextStyle(
+                                fontWeight: FontWeight.w700, fontSize: 17),
+                          )),
+                      Container(
+                          margin: EdgeInsets.only(left: 15, right: 15, top: 14),
+                          child: Text(
+                            "Dimensions",
+                            style: TextStyle(
+                                fontWeight: FontWeight.w700, fontSize: 17),
+                          )),
+                      Container(
+                          margin: EdgeInsets.only(left: 15, right: 15, top: 2),
+                          child: Text(
+                            widget.dimension,
+                            style: TextStyle(
+                                fontWeight: FontWeight.w700, fontSize: 17),
+                          )),
+                      Container(
+                          margin: EdgeInsets.only(left: 15, right: 15, top: 20),
+                          child: Text(
+                            "Number of Pcs",
+                            style: TextStyle(
+                                fontWeight: FontWeight.w700, fontSize: 17),
+                          )),
+                      Container(
+                        margin: EdgeInsets.only(left: 15, right: 15, top: 4),
+                        child: TextFormField(
+                          controller: _pcsControleler,
+                          decoration: InputDecoration(
+                            hintText: widget.pcs,
+                            border: OutlineInputBorder(),
+                          ),
+                        ),
+                      ),
+                      Container(
+                          margin: EdgeInsets.only(left: 15, right: 15, top: 4),
+                          child: Text(
+                            "Rate",
+                            style: TextStyle(
+                                fontWeight: FontWeight.w700, fontSize: 17),
+                          )),
+                      Container(
+                          margin: EdgeInsets.only(left: 15, right: 15, top: 2),
+                          child: Text(
+                            widget.rate,
+                            style: TextStyle(
+                                fontWeight: FontWeight.w700, fontSize: 17),
+                          )),
+                      SizedBox(
+                        height: 30,
+                      ),
+                      Center(
+                          child: ElevatedButton(
+                        onPressed: () {
+                          print(widget.area);
+                          print(widget.uuid);
+                          Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (builder) => OrderPage(
+                                        area: widget.area,
+                                        uuid: widget.uuid,
+                                        dimension: widget.dimension,
+                                        pcs: widget.pcs,
+                                        productname: widget.productname,
+                                        rate: widget.rate,
+                                      )));
+                        },
+                        child: Text("Order"),
+                        style: ElevatedButton.styleFrom(
+                            backgroundColor: Colors.purple,
+                            fixedSize: Size(250, 50),
+                            shape: StadiumBorder()),
+                      ))
                     ],
                   );
                 }
-
-                return Text("Data");
-              }),
-          Container(
-              margin: EdgeInsets.only(left: 10, right: 15, top: 4),
-              child: Text(
-                "Product Name",
-                style: TextStyle(fontWeight: FontWeight.w700, fontSize: 17),
-              )),
-          Container(
-              margin: EdgeInsets.only(left: 10, right: 15, top: 2),
-              child: Text(
-                widget.productname,
-                style: TextStyle(fontWeight: FontWeight.w700, fontSize: 17),
-              )),
-          Container(
-              margin: EdgeInsets.only(left: 10, right: 15, top: 14),
-              child: Text(
-                "Dimensions",
-                style: TextStyle(fontWeight: FontWeight.w700, fontSize: 17),
-              )),
-          Container(
-              margin: EdgeInsets.only(left: 10, right: 15, top: 2),
-              child: Text(
-                widget.dimension,
-                style: TextStyle(fontWeight: FontWeight.w700, fontSize: 17),
-              )),
-          Container(
-              margin: EdgeInsets.only(left: 10, right: 15, top: 20),
-              child: Text(
-                "Number of Pcs",
-                style: TextStyle(fontWeight: FontWeight.w700, fontSize: 17),
-              )),
-          Container(
-            margin: EdgeInsets.only(left: 10, right: 15, top: 4),
-            child: TextFormField(
-              decoration: InputDecoration(
-                hintText: widget.pcs,
-                border: OutlineInputBorder(),
-              ),
-            ),
-          ),
-          Container(
-              margin: EdgeInsets.only(left: 10, right: 15, top: 4),
-              child: Text(
-                "Rate",
-                style: TextStyle(fontWeight: FontWeight.w700, fontSize: 17),
-              )),
-          Container(
-              margin: EdgeInsets.only(left: 10, right: 15, top: 2),
-              child: Text(
-                widget.rate,
-                style: TextStyle(fontWeight: FontWeight.w700, fontSize: 17),
-              )),
-          SizedBox(
-            height: 20,
-          ),
-          Center(
-            child: ElevatedButton(
-              onPressed: () {
-                print(widget.area);
-                print(widget.uuid);
-                Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                        builder: (builder) => OrderPage(
-                              area: widget.area,
-                              uuid: widget.uuid,
-                              dimension: widget.dimension,
-                              pcs: widget.pcs,
-                              productname: widget.productname,
-                              rate: widget.rate,
-                            )));
-              },
-              child: Text("Order"),
-              style: ElevatedButton.styleFrom(
-                  backgroundColor: Colors.purple,
-                  fixedSize: Size(250, 50),
-                  shape: StadiumBorder()),
-            ),
-          )
-        ],
-      ),
-    );
+                return Center(child: Text("No Product Added"));
+              })
+        ]));
   }
 }
