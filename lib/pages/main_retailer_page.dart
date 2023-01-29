@@ -58,8 +58,7 @@ class _MainRetailerPageState extends State<MainRetailerPage> {
         body: StreamBuilder(
             stream:
                 FirebaseFirestore.instance.collection("products").snapshots(),
-            builder: (context,
-                AsyncSnapshot<QuerySnapshot<Map<String, dynamic>>> snapshot) {
+            builder: (context, AsyncSnapshot snapshot) {
               if (!snapshot.hasData) {
                 Center(
                   child: Text("No Product Listed"),
