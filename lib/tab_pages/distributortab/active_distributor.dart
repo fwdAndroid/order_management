@@ -78,7 +78,7 @@ class _ActiveDistributorOrdersState extends State<ActiveDistributorOrders> {
                                   color: Colors.black,
                                   fontWeight: FontWeight.bold),
                             ),
-                            Text(snap['PCS']),
+                            Text(snap['Distributor Area']),
                           ],
                         ),
                       ),

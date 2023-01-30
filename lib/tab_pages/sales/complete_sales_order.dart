@@ -4,23 +4,21 @@ import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/container.dart';
 import 'package:flutter/src/widgets/framework.dart';
 
-class CompletedDistributorsOrders extends StatefulWidget {
-  const CompletedDistributorsOrders({super.key});
+class CompletedSalesOrders extends StatefulWidget {
+  const CompletedSalesOrders({super.key});
 
   @override
-  State<CompletedDistributorsOrders> createState() =>
-      _CompletedDistributorsOrdersState();
+  State<CompletedSalesOrders> createState() => _CompletedSalesOrdersState();
 }
 
-class _CompletedDistributorsOrdersState
-    extends State<CompletedDistributorsOrders> {
+class _CompletedSalesOrdersState extends State<CompletedSalesOrders> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: StreamBuilder(
         stream: FirebaseFirestore.instance
             .collection("orders")
-            .where("distributorid",
+            .where("salesUid",
                 isEqualTo: FirebaseAuth.instance.currentUser!.uid)
             .where("Status", isEqualTo: "Complete")
             .snapshots(),
@@ -60,12 +58,12 @@ class _CompletedDistributorsOrdersState
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
                             Text(
-                              'Distributor Name:',
+                              'Territroty Manager Name:',
                               style: TextStyle(
                                   color: Colors.black,
                                   fontWeight: FontWeight.bold),
                             ),
-                            Text(snap['Distributor Manager Name']),
+                            Text(snap['Territory Manager Name']),
                             Divider(),
                             Text(
                               'Product Name: ',
@@ -89,7 +87,7 @@ class _CompletedDistributorsOrdersState
                                   color: Colors.black,
                                   fontWeight: FontWeight.bold),
                             ),
-                            Text(snap['Distributor Area']),
+                            Text(snap['Territory Area']),
                           ],
                         ),
                       ),

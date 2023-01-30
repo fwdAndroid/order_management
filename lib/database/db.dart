@@ -16,6 +16,7 @@ class Database {
       String? DName,
       String? distributorid,
       String? Status,
+      String? salesUid,
       String? retailerarea,
       String? distributorarea}) async {
     String res = 'Some error occured';
@@ -25,6 +26,7 @@ class Database {
 
       OrderModel userModel = OrderModel(
         teritoryArea: '',
+
         areamanager: '',
         busnissarea: '',
         Status: Status,
@@ -33,7 +35,6 @@ class Database {
         zonalarea: '',
         salesaofficerarea: '',
         distributorarea: distributorarea,
-        distributorid: distributorid,
         tName: '',
         AName: '',
         bName: '',
@@ -47,6 +48,9 @@ class Database {
         productName: productname,
         dimensions: dimension,
         rate: rate,
+        //Auth
+        salesUid: salesUid,
+        distributorid: distributorid,
       );
       await firebaseFirestore
           .collection('orders')

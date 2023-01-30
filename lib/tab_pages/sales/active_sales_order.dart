@@ -3,42 +3,30 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/container.dart';
 import 'package:flutter/src/widgets/framework.dart';
+import 'package:uuid/uuid.dart';
 
-class CompletedDistributorsOrders extends StatefulWidget {
-  const CompletedDistributorsOrders({super.key});
+class ActiveSalesOrders extends StatefulWidget {
+  final Uuid;
+  const ActiveSalesOrders({super.key, required this.Uuid});
 
   @override
-  State<CompletedDistributorsOrders> createState() =>
-      _CompletedDistributorsOrdersState();
+  State<ActiveSalesOrders> createState() => _ActiveSalesOrdersState();
 }
 
-class _CompletedDistributorsOrdersState
-    extends State<CompletedDistributorsOrders> {
+class _ActiveSalesOrdersState extends State<ActiveSalesOrders> {
   @override
   Widget build(BuildContext context) {
+    print(widget.Uuid);
     return Scaffold(
       body: StreamBuilder(
         stream: FirebaseFirestore.instance
             .collection("orders")
-            .where("distributorid",
+            .where("Status", isEqualTo: "Active")
+            .where("salesUid",
                 isEqualTo: FirebaseAuth.instance.currentUser!.uid)
-            .where("Status", isEqualTo: "Complete")
             .snapshots(),
         builder: (context,
             AsyncSnapshot<QuerySnapshot<Map<String, dynamic>>> snapshot) {
-          if (snapshot.hasError) {
-            Center(
-              child: Text("Some Thing Wrong"),
-            );
-          }
-          if (!snapshot.hasData) {
-            Center(
-                child: Text(
-              "Loading",
-              style:
-                  TextStyle(color: Colors.black, fontWeight: FontWeight.bold),
-            ));
-          }
           return Padding(
             padding: const EdgeInsets.all(8.0),
             child: ListView.builder(
@@ -60,12 +48,12 @@ class _CompletedDistributorsOrdersState
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
                             Text(
-                              'Distributor Name:',
+                              'Territory Manager Name:',
                               style: TextStyle(
                                   color: Colors.black,
                                   fontWeight: FontWeight.bold),
                             ),
-                            Text(snap['Distributor Manager Name']),
+                            Text(snap['Territory Manager Name']),
                             Divider(),
                             Text(
                               'Product Name: ',
@@ -89,7 +77,7 @@ class _CompletedDistributorsOrdersState
                                   color: Colors.black,
                                   fontWeight: FontWeight.bold),
                             ),
-                            Text(snap['Distributor Area']),
+                            Text(snap['Territory Area']),
                           ],
                         ),
                       ),
@@ -97,9 +85,9 @@ class _CompletedDistributorsOrdersState
                   );
                 }),
           );
+          ;
         },
       ),
     );
-    ;
   }
 }
