@@ -19,6 +19,7 @@ class Database {
       String? Status,
       String? salesUid,
       String? territoryUid,
+      String? zonaluid,
       String? retailerarea,
       String? distributorarea}) async {
     String res = 'Some error occured';
@@ -49,6 +50,7 @@ class Database {
         uuid: uuid,
         pcs: pcs,
         productName: productname,
+        zonaluid: zonaluid,
         dimensions: dimension,
         rate: rate,
         //Auth
