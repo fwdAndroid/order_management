@@ -35,9 +35,11 @@ class OrderModel {
   String? areauid;
   String? zonaluid;
   String? regionaluid;
+  String? businessuid;
   OrderModel(
       {required this.RName,
       this.regionaluid,
+      this.businessuid,
       required this.productName,
       required this.rate,
       required this.dimensions,
@@ -77,6 +79,7 @@ class OrderModel {
         'dimensions': dimensions,
         'productName': productName,
         'PCS': pcs,
+        'businessuid': businessuid,
         'Status': Status,
         'Territory Area': teritoryArea,
         'Area Area': areamanager,
@@ -98,6 +101,7 @@ class OrderModel {
         'uid': FirebaseAuth.instance.currentUser!.uid,
         'territoryUid': territoryUid,
         'zonaluid': zonaluid,
+        'businessuid': businessuid
       };
 
   ///
@@ -135,6 +139,7 @@ class OrderModel {
         REName: snapshot['Regional Manager Name'],
         AName: snapshot['Area Manager Name'],
         uuid: snapshot['uuid'],
-        zonaluid: snapshot['zonaluid']);
+        zonaluid: snapshot['zonaluid'],
+        businessuid: snapshot['businessuid']);
   }
 }
