@@ -31,6 +31,7 @@ class OrderModel {
   String? uid;
   String? distributorid;
   String? salesUid;
+  String? territoryUid;
   OrderModel(
       {required this.RName,
       required this.productName,
@@ -56,7 +57,8 @@ class OrderModel {
       this.SName,
       this.ZName,
       this.uid,
-      this.bName});
+      this.bName,
+      this.territoryUid});
 
   ///Converting OBject into Json Object
   Map<String, dynamic> toJson() => {
@@ -85,7 +87,8 @@ class OrderModel {
         'Sales Officer Name': SName,
         'Regional Manager Name': REName,
         'Area Manager Name': AName,
-        'uid': FirebaseAuth.instance.currentUser!.uid
+        'uid': FirebaseAuth.instance.currentUser!.uid,
+        'territoryUid': territoryUid,
       };
 
   ///
@@ -102,6 +105,7 @@ class OrderModel {
         RName: snapshot['RetailerName'],
         productName: snapshot['productName'],
         pcs: snapshot['PCS'],
+        territoryUid: snapshot['territoryUid'],
         //Areas
         teritoryArea: snapshot['Territory Area'],
         areamanager: snapshot['Area Area'],

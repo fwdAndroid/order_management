@@ -17,6 +17,7 @@ class Database {
       String? distributorid,
       String? Status,
       String? salesUid,
+      String? territoryUid,
       String? retailerarea,
       String? distributorarea}) async {
     String res = 'Some error occured';
@@ -26,7 +27,7 @@ class Database {
 
       OrderModel userModel = OrderModel(
         teritoryArea: '',
-
+        territoryUid: territoryUid,
         areamanager: '',
         busnissarea: '',
         Status: Status,
