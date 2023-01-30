@@ -32,6 +32,7 @@ class OrderModel {
   String? distributorid;
   String? salesUid;
   String? territoryUid;
+  String? areauid;
   OrderModel(
       {required this.RName,
       required this.productName,
@@ -39,6 +40,7 @@ class OrderModel {
       required this.dimensions,
       required this.pcs,
       this.teritoryArea,
+      this.areauid,
       this.uuid,
       this.salesUid,
       this.distributorid,
@@ -63,6 +65,7 @@ class OrderModel {
   ///Converting OBject into Json Object
   Map<String, dynamic> toJson() => {
         'uuid': uuid,
+        'areauid': 'areauid',
         'salesUid': salesUid,
         'distributorid': distributorid,
         'rate': rate,
@@ -100,6 +103,7 @@ class OrderModel {
         salesUid: snapshot['salesUid'],
         Status: snapshot['Status'],
         uid: snapshot['uid'],
+        areauid: snapshot['areauid'],
         rate: snapshot['rate'],
         dimensions: snapshot['dimensions'],
         RName: snapshot['RetailerName'],
