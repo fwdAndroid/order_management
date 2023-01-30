@@ -17,6 +17,7 @@ class _TerritorySalesLoginState extends State<TerritorySalesLogin> {
   TextEditingController emailController = TextEditingController();
   TextEditingController passController = TextEditingController();
   bool _isLoading = false;
+  bool _isHidden = true;
 
   @override
   void dispose() {
@@ -28,6 +29,8 @@ class _TerritorySalesLoginState extends State<TerritorySalesLogin> {
 
   @override
   Widget build(BuildContext context) {
+    final inputBorder =
+        OutlineInputBorder(borderSide: Divider.createBorderSide(context));
     return Scaffold(
       backgroundColor: Colors.white,
       body: SafeArea(
@@ -57,11 +60,25 @@ class _TerritorySalesLoginState extends State<TerritorySalesLogin> {
             SizedBox(
               height: 23,
             ),
-            TextFormInputField(
-              hintText: 'Enter youe password',
-              textInputType: TextInputType.visiblePassword,
+            TextField(
               controller: passController,
-              isPass: true,
+              keyboardType: TextInputType.visiblePassword,
+              obscureText: _isHidden,
+              decoration: InputDecoration(
+                border: inputBorder,
+                focusedBorder: inputBorder,
+                enabledBorder: inputBorder,
+                filled: true,
+                contentPadding: EdgeInsets.all(8),
+                fillColor: Colors.white,
+                hintText: 'Password',
+                suffix: InkWell(
+                  onTap: _togglePasswordView,
+                  child: Icon(
+                    _isHidden ? Icons.visibility : Icons.visibility_off,
+                  ),
+                ),
+              ),
             ),
             SizedBox(
               height: 23,
@@ -130,6 +147,12 @@ class _TerritorySalesLoginState extends State<TerritorySalesLogin> {
         ),
       )),
     );
+  }
+
+  void _togglePasswordView() {
+    setState(() {
+      _isHidden = !_isHidden;
+    });
   }
 
   void loginUser() {}
