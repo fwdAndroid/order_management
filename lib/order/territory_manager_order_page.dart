@@ -29,6 +29,7 @@ class _TerritoryManagerOrderPageState extends State<TerritoryManagerOrderPage> {
       body: StreamBuilder(
           stream: FirebaseFirestore.instance
               .collection("orders")
+              .where("Status", isEqualTo: "Active")
               .where("Territory Manager Name", isEqualTo: widget.name)
               .snapshots(),
           builder: (context, AsyncSnapshot snapshot) {
@@ -69,6 +70,7 @@ class _TerritoryManagerOrderPageState extends State<TerritoryManagerOrderPage> {
                             MaterialPageRoute(
                                 builder: (builder) =>
                                     TerritoryManagerDetailPage(
+                                      uuid: snap['uuid'],
                                       territoryname: widget.name,
                                       territroyarea: widget.area,
                                       territoryemail: widget.email,

@@ -8,9 +8,10 @@ import 'package:order_management/review/territory_order_review.dart';
 import 'package:order_management/widgets/utils.dart';
 
 class TerritoryManagerDetailPage extends StatefulWidget {
-  final String territroyarea, territoryname, territoryemail;
+  final String territroyarea, territoryname, territoryemail, uuid;
   const TerritoryManagerDetailPage({
     super.key,
+    required this.uuid,
     required this.territroyarea,
     required this.territoryname,
     required this.territoryemail,
@@ -49,6 +50,7 @@ class _TerritoryManagerDetailPageState
           FutureBuilder(
             future: FirebaseFirestore.instance
                 .collection("orders")
+                .where("uuid", isEqualTo: widget.uuid)
                 .where("Territory Manager Name",
                     isEqualTo: widget.territoryname)
                 .get(),
