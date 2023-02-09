@@ -31,6 +31,7 @@ class _ZonalOrderPageState extends State<ZonalOrderPage> {
           stream: FirebaseFirestore.instance
               .collection("orders")
               .where("Zonal Manager Name", isEqualTo: widget.name)
+              .where("Status", isEqualTo: "Active")
               .snapshots(),
           builder: (context, AsyncSnapshot snapshot) {
             if (snapshot.hasError) {
@@ -69,6 +70,7 @@ class _ZonalOrderPageState extends State<ZonalOrderPage> {
                             context,
                             MaterialPageRoute(
                                 builder: (builder) => ZonalOrderDetailPage(
+                                      uuid: snap['uuid'],
                                       areaname: widget.name,
                                       areaarea: widget.area,
                                       areaemail: widget.email,

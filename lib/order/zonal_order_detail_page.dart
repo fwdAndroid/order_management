@@ -10,9 +10,10 @@ import 'package:order_management/review/zonal_order_review.dart';
 import 'package:order_management/widgets/utils.dart';
 
 class ZonalOrderDetailPage extends StatefulWidget {
-  final String areaarea, areaemail, areaname;
+  final String areaarea, areaemail, areaname, uuid;
   const ZonalOrderDetailPage({
     super.key,
+    required this.uuid,
     required this.areaarea,
     required this.areaname,
     required this.areaemail,
@@ -50,6 +51,7 @@ class _ZonalOrderDetailPageState extends State<ZonalOrderDetailPage> {
             future: FirebaseFirestore.instance
                 .collection("orders")
                 .where("Zonal Manager Name", isEqualTo: widget.areaname)
+                .where("uuid", isEqualTo: widget.uuid)
                 .get(),
             builder: (context,
                 AsyncSnapshot<QuerySnapshot<Map<String, dynamic>>> snapshot) {
