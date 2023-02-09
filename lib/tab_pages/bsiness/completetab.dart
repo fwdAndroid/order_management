@@ -18,7 +18,8 @@ class _CompleteState extends State<Complete> {
       body: StreamBuilder(
         stream: FirebaseFirestore.instance
             .collection("orders")
-            .where("uid", isEqualTo: FirebaseAuth.instance.currentUser!.uid)
+            .where("businessuid",
+                isEqualTo: FirebaseAuth.instance.currentUser!.uid)
             .where("Status", isEqualTo: "Complete")
             .snapshots(),
         builder: (context,

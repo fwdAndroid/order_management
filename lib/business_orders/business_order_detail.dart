@@ -8,10 +8,11 @@ import 'package:order_management/review/regional_reivew.dart';
 import 'package:order_management/widgets/utils.dart';
 
 class BussinsssOrderDetail extends StatefulWidget {
-  final String distributorname, distributorarea, distributoremail;
+  final String distributorname, distributorarea, distributoremail, uuid;
   const BussinsssOrderDetail({
     super.key,
     required this.distributorarea,
+    required this.uuid,
     required this.distributorname,
     required this.distributoremail,
   });
@@ -47,6 +48,7 @@ class _BussinsssOrderDetailState extends State<BussinsssOrderDetail> {
           FutureBuilder(
             future: FirebaseFirestore.instance
                 .collection("orders")
+                .where("uuid", isEqualTo: widget.uuid)
                 .where("Business Area", isEqualTo: widget.distributorarea)
                 .get(),
             builder: (context,

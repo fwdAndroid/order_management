@@ -29,6 +29,7 @@ class _ViewOrderPageState extends State<ViewOrderPage> {
       body: StreamBuilder(
           stream: FirebaseFirestore.instance
               .collection("orders")
+              .where("Status", isEqualTo: "Active")
               .where("Business Manager Name", isEqualTo: widget.name)
               .snapshots(),
           builder: (context, AsyncSnapshot snapshot) {
@@ -68,10 +69,10 @@ class _ViewOrderPageState extends State<ViewOrderPage> {
                             context,
                             MaterialPageRoute(
                                 builder: (builder) => BussinsssOrderDetail(
-                                      distributorname: widget.name,
-                                      distributorarea: widget.area,
-                                      distributoremail: widget.email,
-                                    )));
+                                    distributorname: widget.name,
+                                    distributorarea: widget.area,
+                                    distributoremail: widget.email,
+                                    uuid: snap['uuid'])));
                       },
                       child: Text("View"),
                     ),

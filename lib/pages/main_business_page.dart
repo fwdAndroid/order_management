@@ -46,7 +46,7 @@ class _MainBusinessPageState extends State<MainBusinessPage> {
                       color: Colors.white, fontWeight: FontWeight.bold),
                 ))
           ],
-          title: Text("Regional Manager Page"),
+          title: Text("Business Manager Page"),
           backgroundColor: Colors.purple,
         ),
         body: StreamBuilder(
@@ -80,7 +80,7 @@ class _MainBusinessPageState extends State<MainBusinessPage> {
                             ),
                             Center(
                               child: Text(
-                                "Regional Manager Profile Info:",
+                                "Business Manager Profile Info:",
                                 style: TextStyle(
                                     fontWeight: FontWeight.bold, fontSize: 20),
                               ),
@@ -90,28 +90,28 @@ class _MainBusinessPageState extends State<MainBusinessPage> {
                               height: 10,
                             ),
                             Text(
-                              "Regional Manager Name:",
+                              "Business Manager Name:",
                               style: TextStyle(
                                   fontWeight: FontWeight.bold, fontSize: 17),
                             ),
                             Text("Name:" + ds['name']),
                             Divider(),
                             Text(
-                              "Regional Manager Email:",
+                              "Business Manager Email:",
                               style: TextStyle(
                                   fontWeight: FontWeight.bold, fontSize: 17),
                             ),
                             Text(ds['email']),
                             Divider(),
                             Text(
-                              "Regional Manager Area:",
+                              "Business Manager Area:",
                               style: TextStyle(
                                   fontWeight: FontWeight.bold, fontSize: 17),
                             ),
                             Text(ds['area']),
                             Divider(),
                             Text(
-                              "Regional Manager Password:",
+                              "Business Manager Password:",
                               style: TextStyle(
                                   fontWeight: FontWeight.bold, fontSize: 17),
                             ),

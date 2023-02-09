@@ -18,7 +18,8 @@ class _ActiveState extends State<Active> {
       body: StreamBuilder(
         stream: FirebaseFirestore.instance
             .collection("orders")
-            .where("uid", isEqualTo: FirebaseAuth.instance.currentUser!.uid)
+            .where("businessuid",
+                isEqualTo: FirebaseAuth.instance.currentUser!.uid)
             .where("Status", isEqualTo: "Active")
             .snapshots(),
         builder: (context,
