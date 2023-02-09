@@ -29,6 +29,7 @@ class _RegionalOrderPageState extends State<RegionalOrderPage> {
           stream: FirebaseFirestore.instance
               .collection("orders")
               .where("Regional Manager Name", isEqualTo: widget.name)
+              .where("Status", isEqualTo: "Active")
               .snapshots(),
           builder: (context, AsyncSnapshot snapshot) {
             if (snapshot.hasError) {
@@ -67,10 +68,10 @@ class _RegionalOrderPageState extends State<RegionalOrderPage> {
                             context,
                             MaterialPageRoute(
                                 builder: (builder) => RegionalOrderDetailPage(
-                                      distributorname: widget.name,
-                                      distributorarea: widget.area,
-                                      distributoremail: widget.email,
-                                    )));
+                                    distributorname: widget.name,
+                                    distributorarea: widget.area,
+                                    distributoremail: widget.email,
+                                    uuid: snap['uuid'])));
                       },
                       child: Text("View"),
                     ),

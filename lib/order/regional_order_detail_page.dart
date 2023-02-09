@@ -7,10 +7,11 @@ import 'package:order_management/review/regional_reivew.dart';
 import 'package:order_management/widgets/utils.dart';
 
 class RegionalOrderDetailPage extends StatefulWidget {
-  final String distributorname, distributorarea, distributoremail;
+  final String distributorname, distributorarea, distributoremail, uuid;
   const RegionalOrderDetailPage({
     super.key,
     required this.distributorarea,
+    required this.uuid,
     required this.distributorname,
     required this.distributoremail,
   });
@@ -48,6 +49,7 @@ class _RegionalOrderDetailPageState extends State<RegionalOrderDetailPage> {
             future: FirebaseFirestore.instance
                 .collection("orders")
                 .where("Zonal Area", isEqualTo: widget.distributorarea)
+                .where("uuid", isEqualTo: widget.uuid)
                 .get(),
             builder: (context,
                 AsyncSnapshot<QuerySnapshot<Map<String, dynamic>>> snapshot) {
