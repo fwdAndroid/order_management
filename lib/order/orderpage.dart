@@ -2,6 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:dropdown_search/dropdown_search.dart';
 import 'package:order_management/database/db.dart';
+import 'package:order_management/pages/main_regional_page.dart';
 import 'package:order_management/widgets/utils.dart';
 
 class OrderPage extends StatefulWidget {
@@ -167,6 +168,10 @@ class _OrderPageState extends State<OrderPage> {
 
                           Customdialog()
                               .showInSnackBar("Database Added", context);
+                          Navigator.pushReplacement(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (builder) => MainRegionalPage()));
                         },
                         child: Text("Place Order"),
                         style: ElevatedButton.styleFrom(

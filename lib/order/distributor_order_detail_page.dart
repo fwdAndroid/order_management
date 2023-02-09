@@ -6,10 +6,11 @@ import 'package:order_management/review/distributor_order_review.dart';
 import 'package:order_management/widgets/utils.dart';
 
 class DistributorOrderDetailPage extends StatefulWidget {
-  final String distributorname, distributorarea, distributoremail;
+  final String distributorname, distributorarea, distributoremail, uuid;
   const DistributorOrderDetailPage({
     super.key,
     required this.distributorarea,
+    required this.uuid,
     required this.distributorname,
     required this.distributoremail,
   });
@@ -28,6 +29,7 @@ class _DistributorOrderDetailPageState
   Widget build(BuildContext context) {
     TextEditingController _pcsControleler = TextEditingController();
     print(widget.distributorarea);
+    print(widget.uuid);
     return Scaffold(
       appBar: AppBar(
         centerTitle: true,
@@ -47,6 +49,7 @@ class _DistributorOrderDetailPageState
           FutureBuilder(
             future: FirebaseFirestore.instance
                 .collection("orders")
+                .where("uuid", isEqualTo: widget.uuid)
                 .where("Distributor Manager Name",
                     isEqualTo: widget.distributorname)
                 .get(),
