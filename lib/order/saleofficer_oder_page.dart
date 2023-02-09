@@ -28,6 +28,7 @@ class _SalesOfficerOrderPageState extends State<SalesOfficerOrderPage> {
           stream: FirebaseFirestore.instance
               .collection("orders")
               .where("Sales Officer Name", isEqualTo: widget.name)
+              .where("Status", isEqualTo: "Active")
               .snapshots(),
           builder: (context, AsyncSnapshot snapshot) {
             if (snapshot.hasError) {
@@ -67,6 +68,7 @@ class _SalesOfficerOrderPageState extends State<SalesOfficerOrderPage> {
                             MaterialPageRoute(
                                 builder: (builder) =>
                                     SalesOfficerOrderDetailPage(
+                                      uuid: snap['uuid'],
                                       saleofficername: widget.name,
                                       salesofficerarea: widget.area,
                                       salesofficeremail: widget.email,

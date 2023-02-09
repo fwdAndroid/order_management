@@ -7,10 +7,11 @@ import 'package:order_management/review/sales_officer_order_review.dart';
 import 'package:order_management/widgets/utils.dart';
 
 class SalesOfficerOrderDetailPage extends StatefulWidget {
-  final String saleofficername, salesofficerarea, salesofficeremail;
+  final String saleofficername, salesofficerarea, salesofficeremail, uuid;
   const SalesOfficerOrderDetailPage({
     super.key,
     required this.salesofficerarea,
+    required this.uuid,
     required this.saleofficername,
     required this.salesofficeremail,
   });
@@ -48,6 +49,7 @@ class _SalesOfficerOrderDetailPageState
           FutureBuilder(
             future: FirebaseFirestore.instance
                 .collection("orders")
+                .where("uuid", isEqualTo: widget.uuid)
                 .where("Sales Officer Name", isEqualTo: widget.saleofficername)
                 .get(),
             builder: (context,
