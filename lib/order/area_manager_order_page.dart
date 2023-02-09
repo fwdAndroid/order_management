@@ -29,6 +29,7 @@ class _AreaManagerOrderPageState extends State<AreaManagerOrderPage> {
       body: StreamBuilder(
           stream: FirebaseFirestore.instance
               .collection("orders")
+              .where("Status", isEqualTo: "Active")
               .where("Area Manager Name", isEqualTo: widget.name)
               .snapshots(),
           builder: (context, AsyncSnapshot snapshot) {
@@ -69,6 +70,7 @@ class _AreaManagerOrderPageState extends State<AreaManagerOrderPage> {
                             MaterialPageRoute(
                                 builder: (builder) => AreaManagerDetailPage(
                                       areaname: widget.name,
+                                      uuid: snap['uuid'],
                                       areaarea: widget.area,
                                       areaemail: widget.email,
                                     )));

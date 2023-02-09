@@ -9,9 +9,10 @@ import 'package:order_management/review/territory_order_review.dart';
 import 'package:order_management/widgets/utils.dart';
 
 class AreaManagerDetailPage extends StatefulWidget {
-  final String areaarea, areaemail, areaname;
+  final String areaarea, areaemail, areaname, uuid;
   const AreaManagerDetailPage({
     super.key,
+    required this.uuid,
     required this.areaarea,
     required this.areaname,
     required this.areaemail,
@@ -48,6 +49,7 @@ class _AreaManagerDetailPageState extends State<AreaManagerDetailPage> {
           FutureBuilder(
             future: FirebaseFirestore.instance
                 .collection("orders")
+                .where("uuid", isEqualTo: widget.uuid)
                 .where("Area Manager Name", isEqualTo: widget.areaname)
                 .get(),
             builder: (context,
