@@ -48,12 +48,12 @@ class _MainDistributorPageState extends State<MainDistributorPage> {
                       color: Colors.white, fontWeight: FontWeight.bold),
                 ))
           ],
-          title: Text("usersmanagers"),
+          title: Text("Distrubutor"),
           backgroundColor: Colors.purple,
         ),
         body: StreamBuilder(
             stream: FirebaseFirestore.instance
-                .collection("distrubutor")
+                .collection("usersmanagers")
                 .doc(FirebaseAuth.instance.currentUser!.uid)
                 .snapshots(),
             builder: (context, AsyncSnapshot snapshot) {
