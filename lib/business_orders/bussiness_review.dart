@@ -43,8 +43,9 @@ class _BusinessReviewState extends State<BusinessReview> {
       ),
       body: StreamBuilder(
           stream: FirebaseFirestore.instance
-              .collection("business")
+              .collection("usersmanagers")
               .where("area", isEqualTo: widget.SalesOfficerArea)
+              .where("type", isEqualTo: "Business Manager")
               .snapshots(),
           builder: (context,
               AsyncSnapshot<QuerySnapshot<Map<String, dynamic>>> snapshot) {
@@ -109,22 +110,17 @@ class _BusinessReviewState extends State<BusinessReview> {
                       Container(
                           margin: EdgeInsets.only(left: 15, right: 15, top: 15),
                           child: Text(
-                            "Rewrite Number of PCS You want",
+                            "Product Name",
                             style: TextStyle(
                                 fontWeight: FontWeight.w700, fontSize: 17),
                           )),
                       Container(
-                        margin: EdgeInsets.only(left: 15, right: 15, top: 4),
-                        child: TextFormField(
-                          controller: _pcController,
-                          keyboardType: TextInputType.number,
-                          decoration: InputDecoration(
-                            hintText: "Update Your Pieces",
-                            border: OutlineInputBorder(),
-                          ),
-                        ),
-                      ),
-                      Divider(),
+                          margin: EdgeInsets.only(left: 15, right: 15, top: 2),
+                          child: Text(
+                            snap['productName'],
+                            style: TextStyle(
+                                fontWeight: FontWeight.w700, fontSize: 17),
+                          )),
                       SizedBox(
                         height: 20,
                       ),
@@ -139,7 +135,9 @@ class _BusinessReviewState extends State<BusinessReview> {
                               "businessuid":
                                   FirebaseAuth.instance.currentUser!.uid
                             });
-                            Customdialog().showInSnackBar("Update", context);
+                            Customdialog().showInSnackBar(
+                                "Order is Review by Me and I sent it to admin panel",
+                                context);
                             Navigator.push(
                                 context,
                                 MaterialPageRoute(

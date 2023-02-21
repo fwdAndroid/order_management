@@ -59,22 +59,22 @@ class _ActiveState extends State<Active> {
                                   fontWeight: FontWeight.bold),
                             ),
                             Text(snap['productName']),
+                            // Divider(),
+                            // Text(
+                            //   'Pcs: ',
+                            //   style: TextStyle(
+                            //       color: Colors.black,
+                            //       fontWeight: FontWeight.bold),
+                            // ),
+                            // Text(snap['PCS']),
                             Divider(),
                             Text(
-                              'Pcs: ',
+                              'Business Area: ',
                               style: TextStyle(
                                   color: Colors.black,
                                   fontWeight: FontWeight.bold),
                             ),
-                            Text(snap['PCS']),
-                            Divider(),
-                            Text(
-                              'Area: ',
-                              style: TextStyle(
-                                  color: Colors.black,
-                                  fontWeight: FontWeight.bold),
-                            ),
-                            Text(snap['PCS']),
+                            Text(snap['Business Area']),
                           ],
                         ),
                       ),
