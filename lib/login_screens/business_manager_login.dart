@@ -4,6 +4,7 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:order_management/pages/main_business_page.dart';
 import 'package:order_management/provider/circular_provider.dart';
+import 'package:order_management/status/blockuser.dart';
 import 'package:order_management/widgets/text_form_field_widget.dart';
 import 'package:order_management/widgets/utils.dart';
 import 'package:provider/provider.dart';
@@ -139,6 +140,27 @@ class _BussinessManagerLoginState extends State<BussinessManagerLogin> {
     });
   }
 
+  void checckstatus() async {
+    final DocumentReference userRef = FirebaseFirestore.instance
+        .collection('usersmanagers')
+        .doc(FirebaseAuth.instance.currentUser!.uid);
+    final DocumentSnapshot userSnapshot = await userRef.get();
+    Map<String, dynamic> data = userSnapshot.data() as Map<String, dynamic>;
+
+    ;
+    final isBlocked = data['blocked'];
+    if (isBlocked == true) {
+      // User is blocked
+      Navigator.push(
+          context, MaterialPageRoute(builder: (builder) => BlockUser()));
+    } else {
+      Navigator.push(
+          context, MaterialPageRoute(builder: (builder) => MainBusinessPage()));
+      ScaffoldMessenger.of(context)
+          .showSnackBar(SnackBar(content: Text("Login Complete")));
+    }
+  }
+
   void loginUser() async {
     try {
       await FirebaseFirestore.instance
@@ -156,12 +178,7 @@ class _BussinessManagerLoginState extends State<BussinessManagerLogin> {
               password: passController.text,
             )
                 .then((value) {
-              Navigator.pushAndRemoveUntil(
-                  context,
-                  MaterialPageRoute(builder: (builder) => MainBusinessPage()),
-                  (route) => false);
-              ScaffoldMessenger.of(context)
-                  .showSnackBar(SnackBar(content: Text("Login Complete")));
+              checckstatus();
             });
           } else {
             // ScaffoldMessenger.of(context)

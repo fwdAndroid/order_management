@@ -3,6 +3,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:order_management/mains_screen.dart';
 import 'package:order_management/pages/main_regional_page.dart';
+import 'package:order_management/status/blockuser.dart';
 import 'package:order_management/widgets/text_form_field_widget.dart';
 import 'package:order_management/widgets/utils.dart';
 
@@ -135,6 +136,27 @@ class _RegionalLoginState extends State<RegionalLogin> {
     });
   }
 
+  void checckstatus() async {
+    final DocumentReference userRef = FirebaseFirestore.instance
+        .collection('usersmanagers')
+        .doc(FirebaseAuth.instance.currentUser!.uid);
+    final DocumentSnapshot userSnapshot = await userRef.get();
+    Map<String, dynamic> data = userSnapshot.data() as Map<String, dynamic>;
+
+    ;
+    final isBlocked = data['blocked'];
+    if (isBlocked == true) {
+      // User is blocked
+      Navigator.push(
+          context, MaterialPageRoute(builder: (builder) => BlockUser()));
+    } else {
+      Navigator.push(
+          context, MaterialPageRoute(builder: (builder) => MainRegionalPage()));
+      ScaffoldMessenger.of(context)
+          .showSnackBar(SnackBar(content: Text("Login Complete")));
+    }
+  }
+
   void loginUser() async {
     try {
       await FirebaseFirestore.instance
@@ -152,12 +174,7 @@ class _RegionalLoginState extends State<RegionalLogin> {
               password: passController.text,
             )
                 .then((value) {
-              Navigator.pushAndRemoveUntil(
-                  context,
-                  MaterialPageRoute(builder: (builder) => MainRegionalPage()),
-                  (route) => false);
-              ScaffoldMessenger.of(context)
-                  .showSnackBar(SnackBar(content: Text("Login Complete")));
+              checckstatus();
             });
           } else {
             // ScaffoldMessenger.of(context)
