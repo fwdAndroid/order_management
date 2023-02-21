@@ -92,7 +92,7 @@ class _AreaSalesState extends State<AreaSales> {
                 print("Print");
                 try {
                   await FirebaseFirestore.instance
-                      .collection("areas")
+                      .collection("usersmanagers")
                       .get()
                       .then((QuerySnapshot snapshot) {
                     print("sad");

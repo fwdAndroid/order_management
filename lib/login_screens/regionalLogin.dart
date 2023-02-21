@@ -93,7 +93,7 @@ class _RegionalLoginState extends State<RegionalLogin> {
                 print("Print");
                 try {
                   await FirebaseFirestore.instance
-                      .collection("regional")
+                      .collection("usersmanagers")
                       .get()
                       .then((QuerySnapshot snapshot) {
                     print("sad");

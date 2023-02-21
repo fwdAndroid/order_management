@@ -98,7 +98,7 @@ class _BussinessManagerLoginState extends State<BussinessManagerLogin> {
                   print("Print");
                   try {
                     await FirebaseFirestore.instance
-                        .collection("business")
+                        .collection("usersmanagers")
                         .get()
                         .then((QuerySnapshot snapshot) {
                       print("sad");

@@ -92,7 +92,7 @@ class _SalesOfficeLoginState extends State<SalesOfficeLogin> {
                 print("Print");
                 try {
                   await FirebaseFirestore.instance
-                      .collection("sales")
+                      .collection("usersmanagers")
                       .get()
                       .then((QuerySnapshot snapshot) {
                     print("sad");

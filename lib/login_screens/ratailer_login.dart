@@ -93,7 +93,7 @@ class _RetailerAppLoginState extends State<RetailerAppLogin> {
                 print("Print");
                 try {
                   await FirebaseFirestore.instance
-                      .collection("retailers")
+                      .collection("usersmanagers")
                       .get()
                       .then((QuerySnapshot snapshot) {
                     print("sad");

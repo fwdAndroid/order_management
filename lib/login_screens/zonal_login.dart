@@ -92,7 +92,7 @@ class _ZonalLoginState extends State<ZonalLogin> {
                 print("Print");
                 try {
                   await FirebaseFirestore.instance
-                      .collection("zonal")
+                      .collection("usersmanagers")
                       .get()
                       .then((QuerySnapshot snapshot) {
                     print("sad");

@@ -92,7 +92,7 @@ class _TerritorySalesLoginState extends State<TerritorySalesLogin> {
                 print("Print");
                 try {
                   await FirebaseFirestore.instance
-                      .collection("teritory")
+                      .collection("usersmanagers")
                       .get()
                       .then((QuerySnapshot snapshot) {
                     print("sad");

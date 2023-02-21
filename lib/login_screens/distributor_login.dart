@@ -92,7 +92,7 @@ class _DistributorLoginState extends State<DistributorLogin> {
                 print("Print");
                 try {
                   await FirebaseFirestore.instance
-                      .collection("distrubutor")
+                      .collection("usersmanagers")
                       .get()
                       .then((QuerySnapshot snapshot) {
                     print("sad");
