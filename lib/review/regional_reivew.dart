@@ -42,7 +42,7 @@ class _RegionalReviewState extends State<RegionalReview> {
       ),
       body: StreamBuilder(
           stream: FirebaseFirestore.instance
-              .collection("business")
+              .collection("usersmanagers")
               .where("area", isEqualTo: widget.SalesOfficerArea)
               .snapshots(),
           builder: (context,

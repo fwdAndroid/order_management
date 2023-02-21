@@ -41,7 +41,7 @@ class _SalesOfficerReviewState extends State<SalesOfficerReview> {
       ),
       body: StreamBuilder(
           stream: FirebaseFirestore.instance
-              .collection("teritory")
+              .collection("usersmanagers")
               .where("area", isEqualTo: widget.SalesOfficerArea)
               .snapshots(),
           builder: (context,

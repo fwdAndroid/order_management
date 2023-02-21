@@ -41,7 +41,7 @@ class _TerritoryOrderReviewState extends State<TerritoryOrderReview> {
       ),
       body: StreamBuilder(
           stream: FirebaseFirestore.instance
-              .collection("areas")
+              .collection("usersmanagers")
               .where("area", isEqualTo: widget.terirtoryArea)
               .snapshots(),
           builder: (context,

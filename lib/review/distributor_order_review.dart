@@ -40,7 +40,7 @@ class _DistributorOrderReviewState extends State<DistributorOrderReview> {
       ),
       body: StreamBuilder(
           stream: FirebaseFirestore.instance
-              .collection("sales")
+              .collection("usersmanagers")
               .where("area", isEqualTo: widget.distributorarea)
               .snapshots(),
           builder: (context,
