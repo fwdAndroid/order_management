@@ -43,6 +43,7 @@ class _TerritoryOrderReviewState extends State<TerritoryOrderReview> {
           stream: FirebaseFirestore.instance
               .collection("usersmanagers")
               .where("area", isEqualTo: widget.terirtoryArea)
+              .where("type", isEqualTo: "AreaManager")
               .snapshots(),
           builder: (context,
               AsyncSnapshot<QuerySnapshot<Map<String, dynamic>>> snapshot) {
@@ -103,25 +104,25 @@ class _TerritoryOrderReviewState extends State<TerritoryOrderReview> {
                             style: TextStyle(
                                 fontWeight: FontWeight.w700, fontSize: 17),
                           )),
-                      Divider(),
-                      Container(
-                          margin: EdgeInsets.only(left: 15, right: 15, top: 15),
-                          child: Text(
-                            "Rewrite Number of PCS You want",
-                            style: TextStyle(
-                                fontWeight: FontWeight.w700, fontSize: 17),
-                          )),
-                      Container(
-                        margin: EdgeInsets.only(left: 15, right: 15, top: 4),
-                        child: TextFormField(
-                          controller: _pcController,
-                          keyboardType: TextInputType.number,
-                          decoration: InputDecoration(
-                            hintText: "Update Your Pieces",
-                            border: OutlineInputBorder(),
-                          ),
-                        ),
-                      ),
+                      // Divider(),
+                      // Container(
+                      //     margin: EdgeInsets.only(left: 15, right: 15, top: 15),
+                      //     child: Text(
+                      //       "Rewrite Number of PCS You want",
+                      //       style: TextStyle(
+                      //           fontWeight: FontWeight.w700, fontSize: 17),
+                      //     )),
+                      // Container(
+                      //   margin: EdgeInsets.only(left: 15, right: 15, top: 4),
+                      //   child: TextFormField(
+                      //     controller: _pcController,
+                      //     keyboardType: TextInputType.number,
+                      //     decoration: InputDecoration(
+                      //       hintText: "Update Your Pieces",
+                      //       border: OutlineInputBorder(),
+                      //     ),
+                      //   ),
+                      // ),
                       Divider(),
                       SizedBox(
                         height: 20,
@@ -139,7 +140,8 @@ class _TerritoryOrderReviewState extends State<TerritoryOrderReview> {
                               "territoryUid":
                                   FirebaseAuth.instance.currentUser!.uid
                             });
-                            Customdialog().showInSnackBar("Update", context);
+                            Customdialog().showInSnackBar(
+                                "Order Review Successfully", context);
                             Navigator.push(
                                 context,
                                 MaterialPageRoute(

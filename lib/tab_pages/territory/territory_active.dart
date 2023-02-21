@@ -62,14 +62,14 @@ class _TerritoryActiveOrdersState extends State<TerritoryActiveOrders> {
                                   fontWeight: FontWeight.bold),
                             ),
                             Text(snap['productName']),
-                            Divider(),
-                            Text(
-                              'Pcs: ',
-                              style: TextStyle(
-                                  color: Colors.black,
-                                  fontWeight: FontWeight.bold),
-                            ),
-                            Text(snap['PCS']),
+                            // Divider(),
+                            // Text(
+                            //   'Pcs: ',
+                            //   style: TextStyle(
+                            //       color: Colors.black,
+                            //       fontWeight: FontWeight.bold),
+                            // ),
+                            // Text(snap['PCS']),
                             Divider(),
                             Text(
                               'Area: ',
