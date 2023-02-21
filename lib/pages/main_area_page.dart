@@ -6,6 +6,7 @@ import 'package:flutter/src/widgets/framework.dart';
 import 'package:order_management/mains_screen.dart';
 import 'package:order_management/order/area_manager_order_page.dart';
 import 'package:order_management/tabs/area_tab_orders.dart';
+import 'package:order_management/widgets/utils.dart';
 
 class MainAreaPage extends StatefulWidget {
   const MainAreaPage({super.key});
@@ -15,6 +16,12 @@ class MainAreaPage extends StatefulWidget {
 }
 
 class _MainAreaPageState extends State<MainAreaPage> {
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(

@@ -27,11 +27,14 @@ class _AreaSalesState extends State<AreaSales> {
     passController.clear();
   }
 
+  final _scaffoldKey = GlobalKey<ScaffoldState>();
+
   @override
   Widget build(BuildContext context) {
     final inputBorder =
         OutlineInputBorder(borderSide: Divider.createBorderSide(context));
     return Scaffold(
+      key: _scaffoldKey,
       backgroundColor: Colors.white,
       body: SafeArea(
           child: Container(
@@ -90,45 +93,24 @@ class _AreaSalesState extends State<AreaSales> {
                   shape: StadiumBorder()),
               onPressed: () async {
                 print("Print");
-                try {
-                  await FirebaseFirestore.instance
-                      .collection("usersmanagers")
-                      .get()
-                      .then((QuerySnapshot snapshot) {
-                    print("sad");
-                    snapshot.docs.forEach((element) {
-                      if (element['password'] == passController.text &&
-                          element['email'] == emailController.text &&
-                          element['type'] == widget.area) {
-                        if (emailController.text.isEmpty ||
-                            passController.text.isEmpty) {
-                          Customdialog().showInSnackBar(
-                              "Email and Password is needed", context);
-                        } else {
-                          FirebaseAuth.instance
-                              .signInWithEmailAndPassword(
-                            email: emailController.text,
-                            password: passController.text,
-                          )
-                              .then((value) {
-                            Customdialog()
-                                .showInSnackBar("Login Successfullt", context);
-                            Navigator.pushAndRemoveUntil(
-                                context,
-                                MaterialPageRoute(
-                                    builder: (builder) => MainAreaPage()),
-                                (route) => false);
-                          });
-                        }
-                        Customdialog()
-                            .showInSnackBar("Login Successfullt", context);
-                      } else {
-                        Customdialog().showInSnackBar("wrong", context);
-                      }
-                    });
-                  });
-                } catch (e) {
-                  Customdialog().showInSnackBar(e.toString(), context);
+                if (emailController.text.isEmpty &&
+                    passController.text.isEmpty) {
+                  ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                    content: Text("email and password is missing"),
+                    duration: Duration(seconds: 2),
+                  ));
+                } else if (emailController.text.isEmpty) {
+                  ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                    content: Text("email is required"),
+                    duration: Duration(seconds: 2),
+                  ));
+                } else if (passController.text.isEmpty) {
+                  ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                    content: Text("password is required"),
+                    duration: Duration(seconds: 2),
+                  ));
+                } else {
+                  loginUser();
                 }
               },
               child: _isLoading
@@ -149,7 +131,39 @@ class _AreaSalesState extends State<AreaSales> {
     );
   }
 
-  void loginUser() {}
+  void loginUser() async {
+    try {
+      await FirebaseFirestore.instance
+          .collection("usersmanagers")
+          .get()
+          .then((QuerySnapshot snapshot) {
+        print("sad");
+        snapshot.docs.forEach((element) {
+          if (element['password'] == passController.text &&
+              element['email'] == emailController.text &&
+              element['type'] == widget.area) {
+            FirebaseAuth.instance
+                .signInWithEmailAndPassword(
+              email: emailController.text,
+              password: passController.text,
+            )
+                .then((value) {
+              Navigator.pushAndRemoveUntil(
+                  context,
+                  MaterialPageRoute(builder: (builder) => MainAreaPage()),
+                  (route) => false);
+              ScaffoldMessenger.of(context)
+                  .showSnackBar(SnackBar(content: Text("Login Complete")));
+            });
+          } else {
+            print("nothing");
+            // Customdialog().showInSnackBar(
+            //     "email or password may be wrong please rewrite it", context);
+          }
+        });
+      });
+    } catch (e) {}
+  }
 
   void _togglePasswordView() {
     setState(() {

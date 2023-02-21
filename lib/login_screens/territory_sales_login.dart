@@ -89,47 +89,26 @@ class _TerritorySalesLoginState extends State<TerritorySalesLogin> {
                   fixedSize: Size(300, 50),
                   shape: StadiumBorder()),
               onPressed: () async {
-                print("Print");
-                try {
-                  await FirebaseFirestore.instance
-                      .collection("usersmanagers")
-                      .get()
-                      .then((QuerySnapshot snapshot) {
-                    print("sad");
-                    snapshot.docs.forEach((element) {
-                      if (element['password'] == passController.text &&
-                          element['email'] == emailController.text &&
-                          element['type'] == widget.r) {
-                        if (emailController.text.isEmpty ||
-                            passController.text.isEmpty) {
-                          Customdialog().showInSnackBar(
-                              "Email and Password is needed", context);
-                        } else {
-                          FirebaseAuth.instance
-                              .signInWithEmailAndPassword(
-                            email: emailController.text,
-                            password: passController.text,
-                          )
-                              .then((value) {
-                            Customdialog()
-                                .showInSnackBar("Login Successfullt", context);
-                            Navigator.pushAndRemoveUntil(
-                                context,
-                                MaterialPageRoute(
-                                    builder: (builder) => MainTerritoryPage()),
-                                (route) => false);
-                          });
-                        }
-                        Customdialog()
-                            .showInSnackBar("Login Successfullt", context);
-                      } else {
-                        Customdialog().showInSnackBar("wrong", context);
-                      }
-                    });
-                  });
-                } catch (e) {
-                  Customdialog().showInSnackBar(e.toString(), context);
+                if (emailController.text.isEmpty &&
+                    passController.text.isEmpty) {
+                  ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                    content: Text("email and password is missing"),
+                    duration: Duration(seconds: 2),
+                  ));
+                } else if (emailController.text.isEmpty) {
+                  ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                    content: Text("email is required"),
+                    duration: Duration(seconds: 2),
+                  ));
+                } else if (passController.text.isEmpty) {
+                  ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                    content: Text("password is required"),
+                    duration: Duration(seconds: 2),
+                  ));
+                } else {
+                  loginUser();
                 }
+                print("Print");
               },
               child: _isLoading
                   ? Center(
@@ -155,5 +134,38 @@ class _TerritorySalesLoginState extends State<TerritorySalesLogin> {
     });
   }
 
-  void loginUser() {}
+  void loginUser() async {
+    try {
+      await FirebaseFirestore.instance
+          .collection("usersmanagers")
+          .get()
+          .then((QuerySnapshot snapshot) {
+        print("sad");
+        snapshot.docs.forEach((element) {
+          if (element['password'] == passController.text &&
+              element['email'] == emailController.text &&
+              element['type'] == widget.r) {
+            FirebaseAuth.instance
+                .signInWithEmailAndPassword(
+              email: emailController.text,
+              password: passController.text,
+            )
+                .then((value) {
+              Navigator.pushAndRemoveUntil(
+                  context,
+                  MaterialPageRoute(builder: (builder) => MainTerritoryPage()),
+                  (route) => false);
+              ScaffoldMessenger.of(context)
+                  .showSnackBar(SnackBar(content: Text("Login Complete")));
+            });
+          } else {
+            // ScaffoldMessenger.of(context)
+            //     .showSnackBar(SnackBar(content: Text("w")));
+          }
+        });
+      });
+    } catch (e) {
+      Customdialog().showInSnackBar(e.toString(), context);
+    }
+  }
 }
