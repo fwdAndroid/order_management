@@ -145,24 +145,24 @@ class _SalesOfficerOrderDetailPageState
                                       fontWeight: FontWeight.w700,
                                       fontSize: 17),
                                 )),
-                            Container(
-                                margin: EdgeInsets.only(
-                                    left: 15, right: 15, top: 20),
-                                child: Text(
-                                  "Number of Pcs",
-                                  style: TextStyle(
-                                      fontWeight: FontWeight.w700,
-                                      fontSize: 17),
-                                )),
-                            Container(
-                                margin: EdgeInsets.only(
-                                    left: 15, right: 15, top: 4),
-                                child: Text(
-                                  snap['PCS'],
-                                  style: TextStyle(
-                                      fontWeight: FontWeight.w700,
-                                      fontSize: 17),
-                                )),
+                            // Container(
+                            //     margin: EdgeInsets.only(
+                            //         left: 15, right: 15, top: 20),
+                            //     child: Text(
+                            //       "Number of Pcs",
+                            //       style: TextStyle(
+                            //           fontWeight: FontWeight.w700,
+                            //           fontSize: 17),
+                            //     )),
+                            // Container(
+                            //     margin: EdgeInsets.only(
+                            //         left: 15, right: 15, top: 4),
+                            //     child: Text(
+                            //       snap['PCS'],
+                            //       style: TextStyle(
+                            //           fontWeight: FontWeight.w700,
+                            //           fontSize: 17),
+                            //     )),
                             SizedBox(
                               height: 20,
                             ),

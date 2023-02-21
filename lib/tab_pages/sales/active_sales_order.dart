@@ -62,15 +62,15 @@ class _ActiveSalesOrdersState extends State<ActiveSalesOrders> {
                                   fontWeight: FontWeight.bold),
                             ),
                             Text(snap['productName']),
-                            Divider(),
-                            Text(
-                              'Pcs: ',
-                              style: TextStyle(
-                                  color: Colors.black,
-                                  fontWeight: FontWeight.bold),
-                            ),
-                            Text(snap['PCS']),
-                            Divider(),
+                            // Divider(),
+                            // Text(
+                            //   'Pcs: ',
+                            //   style: TextStyle(
+                            //       color: Colors.black,
+                            //       fontWeight: FontWeight.bold),
+                            // ),
+                            // Text(snap['PCS']),
+                            // Divider(),
                             Text(
                               'Area: ',
                               style: TextStyle(
