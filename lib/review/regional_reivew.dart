@@ -44,6 +44,7 @@ class _RegionalReviewState extends State<RegionalReview> {
           stream: FirebaseFirestore.instance
               .collection("usersmanagers")
               .where("area", isEqualTo: widget.SalesOfficerArea)
+              .where("type", isEqualTo: "Business Manager")
               .snapshots(),
           builder: (context,
               AsyncSnapshot<QuerySnapshot<Map<String, dynamic>>> snapshot) {
@@ -105,25 +106,25 @@ class _RegionalReviewState extends State<RegionalReview> {
                                 fontWeight: FontWeight.w700, fontSize: 17),
                           )),
                       Divider(),
-                      Container(
-                          margin: EdgeInsets.only(left: 15, right: 15, top: 15),
-                          child: Text(
-                            "Rewrite Number of PCS You want",
-                            style: TextStyle(
-                                fontWeight: FontWeight.w700, fontSize: 17),
-                          )),
-                      Container(
-                        margin: EdgeInsets.only(left: 15, right: 15, top: 4),
-                        child: TextFormField(
-                          controller: _pcController,
-                          keyboardType: TextInputType.number,
-                          decoration: InputDecoration(
-                            hintText: "Update Your Pieces",
-                            border: OutlineInputBorder(),
-                          ),
-                        ),
-                      ),
-                      Divider(),
+                      // Container(
+                      //     margin: EdgeInsets.only(left: 15, right: 15, top: 15),
+                      //     child: Text(
+                      //       "Rewrite Number of PCS You want",
+                      //       style: TextStyle(
+                      //           fontWeight: FontWeight.w700, fontSize: 17),
+                      //     )),
+                      // Container(
+                      //   margin: EdgeInsets.only(left: 15, right: 15, top: 4),
+                      //   child: TextFormField(
+                      //     controller: _pcController,
+                      //     keyboardType: TextInputType.number,
+                      //     decoration: InputDecoration(
+                      //       hintText: "Update Your Pieces",
+                      //       border: OutlineInputBorder(),
+                      //     ),
+                      //   ),
+                      // ),
+                      // Divider(),
                       SizedBox(
                         height: 20,
                       ),
@@ -140,7 +141,8 @@ class _RegionalReviewState extends State<RegionalReview> {
                               "regionaluid":
                                   FirebaseAuth.instance.currentUser!.uid
                             });
-                            Customdialog().showInSnackBar("Update", context);
+                            Customdialog().showInSnackBar(
+                                "Order Proceed to Bussiness Manager", context);
                             Navigator.push(
                                 context,
                                 MaterialPageRoute(

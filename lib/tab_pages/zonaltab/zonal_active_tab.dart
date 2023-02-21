@@ -62,14 +62,14 @@ class _ZonalActiveTabState extends State<ZonalActiveTab> {
                                   fontWeight: FontWeight.bold),
                             ),
                             Text(snap['productName']),
-                            Divider(),
-                            Text(
-                              'Pcs: ',
-                              style: TextStyle(
-                                  color: Colors.black,
-                                  fontWeight: FontWeight.bold),
-                            ),
-                            Text(snap['PCS']),
+                            // Divider(),
+                            // Text(
+                            //   'Pcs: ',
+                            //   style: TextStyle(
+                            //       color: Colors.black,
+                            //       fontWeight: FontWeight.bold),
+                            // ),
+                            // Text(snap['PCS']),
                             Divider(),
                             Text(
                               'Regional Manager Area: ',
