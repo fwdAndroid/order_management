@@ -1,7 +1,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.order_management">
    <application
-        android:label="order_management"
+        android:label="POONIA"
         android:name="${applicationName}"
         android:icon="@mipmap/ic_launcher">
         <activity
