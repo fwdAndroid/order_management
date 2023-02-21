@@ -72,14 +72,14 @@ class _RegionalCompleteTabState extends State<RegionalCompleteTab> {
                                   fontWeight: FontWeight.bold),
                             ),
                             Text(snap['productName']),
-                            Divider(),
-                            Text(
-                              'Pcs: ',
-                              style: TextStyle(
-                                  color: Colors.black,
-                                  fontWeight: FontWeight.bold),
-                            ),
-                            Text(snap['PCS']),
+                            // Divider(),
+                            // Text(
+                            //   'Pcs: ',
+                            //   style: TextStyle(
+                            //       color: Colors.black,
+                            //       fontWeight: FontWeight.bold),
+                            // ),
+                            // Text(snap['PCS']),
                             Divider(),
                             Text(
                               'Business Area: ',
