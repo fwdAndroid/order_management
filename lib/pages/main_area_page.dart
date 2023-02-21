@@ -51,7 +51,7 @@ class _MainAreaPageState extends State<MainAreaPage> {
         ),
         body: StreamBuilder(
             stream: FirebaseFirestore.instance
-                .collection("areas")
+                .collection("usersmanagers")
                 .doc(FirebaseAuth.instance.currentUser!.uid)
                 .snapshots(),
             builder: (context, AsyncSnapshot snapshot) {

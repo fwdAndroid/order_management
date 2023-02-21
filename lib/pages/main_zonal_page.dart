@@ -51,7 +51,7 @@ class _MainZonalPageState extends State<MainZonalPage> {
         ),
         body: StreamBuilder(
             stream: FirebaseFirestore.instance
-                .collection("zonal")
+                .collection("usersmanagers")
                 .doc(FirebaseAuth.instance.currentUser!.uid)
                 .snapshots(),
             builder: (context, AsyncSnapshot snapshot) {

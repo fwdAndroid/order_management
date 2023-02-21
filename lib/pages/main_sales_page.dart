@@ -53,7 +53,7 @@ class _MainSalesPageState extends State<MainSalesPage> {
         ),
         body: StreamBuilder(
             stream: FirebaseFirestore.instance
-                .collection("sales")
+                .collection("usersmanagers")
                 .doc(FirebaseAuth.instance.currentUser!.uid)
                 .snapshots(),
             builder: (context, AsyncSnapshot snapshot) {

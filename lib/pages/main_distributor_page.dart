@@ -48,7 +48,7 @@ class _MainDistributorPageState extends State<MainDistributorPage> {
                       color: Colors.white, fontWeight: FontWeight.bold),
                 ))
           ],
-          title: Text("Distributor"),
+          title: Text("usersmanagers"),
           backgroundColor: Colors.purple,
         ),
         body: StreamBuilder(

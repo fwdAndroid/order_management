@@ -53,7 +53,7 @@ class _MainRegionalPageState extends State<MainRegionalPage> {
         ),
         body: StreamBuilder(
             stream: FirebaseFirestore.instance
-                .collection("regional")
+                .collection("usersmanagers")
                 .doc(FirebaseAuth.instance.currentUser!.uid)
                 .snapshots(),
             builder: (context, AsyncSnapshot snapshot) {

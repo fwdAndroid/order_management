@@ -51,7 +51,7 @@ class _MainBusinessPageState extends State<MainBusinessPage> {
         ),
         body: StreamBuilder(
             stream: FirebaseFirestore.instance
-                .collection("business")
+                .collection("usersmanagers")
                 .doc(FirebaseAuth.instance.currentUser!.uid)
                 .snapshots(),
             builder: (context, AsyncSnapshot snapshot) {

@@ -53,7 +53,7 @@ class _MainTerritoryPageState extends State<MainTerritoryPage> {
         ),
         body: StreamBuilder(
             stream: FirebaseFirestore.instance
-                .collection("teritory")
+                .collection("usersmanagers")
                 .doc(FirebaseAuth.instance.currentUser!.uid)
                 .snapshots(),
             builder: (context, AsyncSnapshot snapshot) {
