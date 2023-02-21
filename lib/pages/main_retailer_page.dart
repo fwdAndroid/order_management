@@ -79,7 +79,7 @@ class _MainRetailerPageState extends State<MainRetailerPage> {
                               mainAxisAlignment: MainAxisAlignment.center,
                               children: [
                                 Text("Product Name:" + snap['productname']),
-                                Text("Product Pcs:" + snap['pcs']),
+                                Text("Product Rate:" + snap['rate']),
                               ],
                             ),
                             trailing: TextButton(
@@ -93,7 +93,7 @@ class _MainRetailerPageState extends State<MainRetailerPage> {
                                                 uuid: snap['uuid'],
                                                 rate: snap['rate'],
                                                 dimension: snap['dimensions'],
-                                                pcs: snap['pcs'],
+                                                // pcs: snap['pcs'],
                                                 productname:
                                                     snap['productname'],
                                               )));

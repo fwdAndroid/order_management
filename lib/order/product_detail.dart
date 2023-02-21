@@ -4,7 +4,7 @@ import 'package:flutter/src/widgets/framework.dart';
 import 'package:order_management/order/orderpage.dart';
 
 class ProductDetail extends StatefulWidget {
-  final String rate, dimension, pcs, productname, uuid;
+  final String rate, dimension, productname, uuid;
   final area;
   final name;
   const ProductDetail(
@@ -13,7 +13,7 @@ class ProductDetail extends StatefulWidget {
       required this.name,
       required this.dimension,
       required this.uuid,
-      required this.pcs,
+      //  this.pcs,
       required this.productname,
       required this.rate});
 
@@ -73,13 +73,13 @@ class _ProductDetailState extends State<ProductDetail> {
                     SizedBox(
                       height: 10,
                     ),
-                    Text(
-                      'Product Pcs:' + widget.pcs,
-                      style: TextStyle(color: Colors.black, fontSize: 17),
-                    ),
-                    SizedBox(
-                      height: 10,
-                    ),
+                    // Text(
+                    //   'Product Pcs:' + widget.pcs,
+                    //   style: TextStyle(color: Colors.black, fontSize: 17),
+                    // ),
+                    // SizedBox(
+                    //   height: 10,
+                    // ),
                     Text(
                       'Product Rate:' + widget.rate,
                       style: TextStyle(color: Colors.black, fontSize: 17),
@@ -104,7 +104,7 @@ class _ProductDetailState extends State<ProductDetail> {
                             name: widget.name,
                             uuid: widget.uuid,
                             dimension: widget.dimension,
-                            pcs: widget.pcs,
+                            // pcs: widget.pcs,
                             productname: widget.productname,
                             rate: widget.rate,
                           )));

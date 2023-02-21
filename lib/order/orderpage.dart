@@ -3,10 +3,11 @@ import 'package:flutter/material.dart';
 import 'package:dropdown_search/dropdown_search.dart';
 import 'package:order_management/database/db.dart';
 import 'package:order_management/pages/main_regional_page.dart';
+import 'package:order_management/pages/main_retailer_page.dart';
 import 'package:order_management/widgets/utils.dart';
 
 class OrderPage extends StatefulWidget {
-  final String rate, dimension, pcs, productname, uuid;
+  final String rate, dimension, productname, uuid;
   final area;
   final name;
   const OrderPage(
@@ -15,7 +16,7 @@ class OrderPage extends StatefulWidget {
       required this.dimension,
       required this.area,
       required this.uuid,
-      required this.pcs,
+      // required this.pcs,
       required this.productname,
       required this.rate});
 
@@ -46,8 +47,9 @@ class _OrderPageState extends State<OrderPage> {
           ),
           StreamBuilder<QuerySnapshot>(
               stream: FirebaseFirestore.instance
-                  .collection("distrubutor")
+                  .collection("usersmanagers")
                   .where("area", isEqualTo: widget.area)
+                  .where("type", isEqualTo: "Distributor")
                   .snapshots(),
               builder: (context, snapshot) {
                 if (!snapshot.hasData)
@@ -117,24 +119,24 @@ class _OrderPageState extends State<OrderPage> {
                             style: TextStyle(
                                 fontWeight: FontWeight.w700, fontSize: 17),
                           )),
-                      Container(
-                          margin: EdgeInsets.only(left: 15, right: 15, top: 20),
-                          child: Text(
-                            "Number of Pcs",
-                            style: TextStyle(
-                                fontWeight: FontWeight.w700, fontSize: 17),
-                          )),
-                      Container(
-                        margin: EdgeInsets.only(left: 15, right: 15, top: 4),
-                        child: TextFormField(
-                          controller: _pcsControleler,
-                          keyboardType: TextInputType.number,
-                          decoration: InputDecoration(
-                            hintText: widget.pcs,
-                            border: OutlineInputBorder(),
-                          ),
-                        ),
-                      ),
+                      // Container(
+                      //     margin: EdgeInsets.only(left: 15, right: 15, top: 20),
+                      //     child: Text(
+                      //       "Number of Pcs",
+                      //       style: TextStyle(
+                      //           fontWeight: FontWeight.w700, fontSize: 17),
+                      //     )),
+                      // Container(
+                      //   margin: EdgeInsets.only(left: 15, right: 15, top: 4),
+                      //   child: TextFormField(
+                      //     controller: _pcsControleler,
+                      //     keyboardType: TextInputType.number,
+                      //     decoration: InputDecoration(
+                      //       hintText: widget.pcs,
+                      //       border: OutlineInputBorder(),
+                      //     ),
+                      //   ),
+                      // ),
                       Container(
                           margin: EdgeInsets.only(left: 15, right: 15, top: 4),
                           child: Text(
@@ -171,7 +173,7 @@ class _OrderPageState extends State<OrderPage> {
                           Navigator.pushReplacement(
                               context,
                               MaterialPageRoute(
-                                  builder: (builder) => MainRegionalPage()));
+                                  builder: (builder) => MainRetailerPage()));
                         },
                         child: Text("Place Order"),
                         style: ElevatedButton.styleFrom(

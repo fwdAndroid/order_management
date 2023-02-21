@@ -60,20 +60,12 @@ class _ActiveRetailerOrdersState extends State<ActiveRetailerOrders> {
                             Text(snap['productName']),
                             Divider(),
                             Text(
-                              'Pcs: ',
-                              style: TextStyle(
-                                  color: Colors.black,
-                                  fontWeight: FontWeight.bold),
-                            ),
-                            Text(snap['PCS']),
-                            Divider(),
-                            Text(
                               'Area: ',
                               style: TextStyle(
                                   color: Colors.black,
                                   fontWeight: FontWeight.bold),
                             ),
-                            Text(snap['PCS']),
+                            Text(snap['Distributor Area']),
                           ],
                         ),
                       ),
